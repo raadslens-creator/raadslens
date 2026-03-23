@@ -62,10 +62,9 @@ def save_seen(seen):
 
 
 def download_audio(date_id):
-    """Download audio via CompanyWebcast HLS stream."""
-    # Stap 1: haal player token op
+    """Download MP3 direct van S3 via de RoyalCast API."""
     api_url = f"https://channel.royalcast.com/portal/api/1.0/gemeentetexel/webcasts/gemeentetexel/{date_id}?method=GET&key="
-    log(f"Player info ophalen: {api_url}")
+    log(f"API ophalen: {api_url}")
     try:
         req = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -74,50 +73,53 @@ def download_audio(date_id):
         log(f"API fout: {e}")
         return None
 
-    profile_id = data.get("profileId", "")
-    webcast_id = data.get("id", "")
-    log(f"Profile ID: {profile_id}, Webcast ID: {webcast_id}")
+    # Zoek MP3 in attachments
+    mp3_url = None
+    for attachment in data.get("attachments", []):
+        if attachment.get("contentType") == "audio/mpeg":
+            mp3_url = attachment.get("location")
+            break
 
-    # Stap 2: haal HLS stream URL op via CompanyWebcast SDK
-    sdk_url = f"https://sdk.companywebcast.com/players/{profile_id}/stream/hls"
-    log(f"Stream ophalen: {sdk_url}")
-    try:
-        headers = {
-            "User-Agent": "Mozilla/5.0",
-            "Referer": f"https://sdk.companywebcast.com/sdk/player/?id=gemeentetexel_{date_id}",
-            "Origin": "https://sdk.companywebcast.com",
-        }
-        req = urllib.request.Request(sdk_url, headers=headers)
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            stream_data = json.loads(resp.read())
-            hls_url = stream_data.get("url") or stream_data.get("hlsUrl") or stream_data.get("streamUrl", "")
-            log(f"Stream URL: {hls_url[:80] if hls_url else 'niet gevonden'}")
-            log(f"Volledige response: {json.dumps(stream_data)[:300]}")
-    except Exception as e:
-        log(f"Stream fout: {e}")
+    # Fallback: zoek MP4
+    if not mp3_url:
+        for attachment in data.get("attachments", []):
+            if attachment.get("contentType") == "video/mp4":
+                mp3_url = attachment.get("location")
+                break
+
+    if not mp3_url:
+        log("Geen MP3 of MP4 gevonden in API-response")
         return None
 
-    if not hls_url:
-        log("Geen stream URL gevonden")
-        return None
-
-    # Stap 3: download met ffmpeg
+    log(f"Download URL gevonden: {mp3_url[:80]}...")
     output = f"audio/{date_id}_raw.mp3"
     Path("audio").mkdir(exist_ok=True)
-    log(f"Downloaden met ffmpeg...")
+
     cmd = [
-        "ffmpeg", "-y",
-        "-i", hls_url,
-        "-vn", "-acodec", "libmp3lame", "-q:a", "4",
-        output
+        "yt-dlp",
+        "--output", output,
+        "--no-playlist",
+        "--socket-timeout", "60",
+        "--retries", "5",
+        mp3_url,
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        log(f"ffmpeg fout:\n{result.stderr[-500:]}")
-        return None
+        log(f"yt-dlp fout:\n{result.stderr[-500:]}")
+        # Probeer met wget als fallback
+        log("Fallback: direct downloaden...")
+        try:
+            req = urllib.request.Request(mp3_url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                Path(output).write_bytes(resp.read())
+        except Exception as e:
+            log(f"Download fout: {e}")
+            return None
+
     if not Path(output).exists():
         log("Bestand niet gevonden")
         return None
+
     log(f"Download OK ({Path(output).stat().st_size / 1024 / 1024:.1f} MB)")
     return output
 
