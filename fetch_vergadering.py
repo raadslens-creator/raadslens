@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROYALCAST_API = "https://channel.royalcast.com/portal/api/1.0/gemeentetexel/webcasts/gemeentetexel"
-ROYALCAST_LANDING = "https://channel.royalcast.com/landingpage/texel/gemeentetexel"
+ROYALCAST_LANDING = "https://sdk.companywebcast.com/players/727d609c-cd68-49db-b4af-ee8170f2d21f/stream/hls"
 SEEN_FILE = Path("docs/seen.json")
 FEED_FILE = Path("docs/feed.xml")
 REPO = os.environ.get("GITHUB_REPOSITORY", "")
@@ -62,7 +62,7 @@ def save_seen(seen):
 
 
 def download_audio(date_id):
-    url = f"{ROYALCAST_LANDING}/{date_id}/"
+    url = f"https://sdk.companywebcast.com/players/727d609c-cd68-49db-b4af-ee8170f2d21f/stream/hls"
     output = f"audio/{date_id}_raw.mp3"
     Path("audio").mkdir(exist_ok=True)
     log(f"Downloaden: {url}")
