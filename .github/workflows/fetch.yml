@@ -25,10 +25,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: yt-dlp en ffmpeg installeren
+- name: yt-dlp en ffmpeg installeren
         run: |
           pip install yt-dlp
-          sudo apt-get install -y ffmpeg --fix-missing || sudo apt-get install -y ffmpeg
+          sudo apt-get update -o Acquire::Retries=3
+          sudo apt-get install -y ffmpeg --fix-missing
 
       - name: Vergadering ophalen
         env:
