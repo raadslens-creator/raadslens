@@ -12,6 +12,22 @@ SILENCE_THRESHOLD_DB = "-35dB"
 SILENCE_MIN_DURATION = 45
 LOGO_URL = "https://raadslens-creator.github.io/texel-raad-podcast/logo.png"
 
+PODCAST_BESCHRIJVING = (
+    "Lokale democratie in je oren. Raadslens zet elke vergadering van de Texelse "
+    "gemeenteraad automatisch om naar een podcast - zodat je kunt luisteren wanneer "
+    "het jou uitkomt. Onderweg, tijdens het sporten, of gewoon thuis. Blijf op de "
+    "hoogte van wat er speelt in jouw gemeente, zonder drie uur voor een scherm te zitten."
+)
+
+VERANTWOORDING = """---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt, zonder drie uur voor een scherm te zitten.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op texel.bestuurlijkeinformatie.nl.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com"""
+
 MAANDEN = {
     1: "januari", 2: "februari", 3: "maart", 4: "april",
     5: "mei", 6: "juni", 7: "juli", 8: "augustus",
@@ -37,7 +53,7 @@ def get_recent_webcast_ids():
     """Genereer mogelijke webcast IDs voor de afgelopen 14 dagen."""
     ids = []
     today = datetime.now(timezone.utc)
-    for days_ago in range(0, 45):
+    for days_ago in range(0, 14):
         date = today - timedelta(days=days_ago)
         date_str = date.strftime("%Y%m%d")
         for n in [1, 2, 3]:
@@ -79,7 +95,6 @@ def get_intro_duration(data):
         log("Geen actualStart gevonden - intro niet wegknippen")
         return 0
 
-    # Zoek het vroegste event in alle topics
     earliest_event = None
     for topic in data.get("topics", []):
         for event in topic.get("events", []):
@@ -109,14 +124,12 @@ def get_chapter_times(data, actual_start_sec):
 
         events = topic.get("events", [])
         if events:
-            # Gebruik de starttijd van het eerste event
             event_start = parse_royalcast_timestamp(events[0].get("start"))
             if event_start and actual_start_sec:
                 start_sec = max(0, event_start - actual_start_sec)
             else:
                 start_sec = 0
         else:
-            # Geen event-tijden - gebruik vorig hoofdstuk + schatting
             start_sec = chapters[-1]["start_sec"] + 60 if chapters else 0
 
         chapters.append({
@@ -265,35 +278,24 @@ def remove_silences(input_file, output_file):
 
 
 def correct_chapter_times(chapters, intro_sec, silences):
-    """
-    Corrigeer hoofdstuktijden voor:
-    1. Weggeknipt intro
-    2. Verwijderde schorsingen
-    """
+    """Corrigeer hoofdstuktijden voor weggeknipt intro en schorsingen."""
     corrected = []
     for ch in chapters:
         t = ch["start_sec"]
-
-        # Corrigeer voor intro
         t = max(0, t - intro_sec)
-
-        # Corrigeer voor verwijderde schorsingen
         removed = sum(
             min(end, t) - start
             for start, end, _ in silences
             if start < t
         )
         t = max(0, t - removed)
-
         corrected.append({**ch, "start_sec": t})
-
     return corrected
 
 
 def add_chapters_to_mp3(audio_file, chapters):
     """Voeg hoofdstukken toe als ID3 CHAP-tags via mutagen."""
     if not chapters:
-        log("Geen hoofdstukken om toe te voegen")
         return
     try:
         from mutagen.mp3 import MP3
@@ -344,16 +346,28 @@ def add_chapters_to_mp3(audio_file, chapters):
     log("Hoofdstukken opgeslagen")
 
 
-def build_shownotes(data, date_str):
-    """Bouw shownotes op uit agendapunten."""
+def build_shownotes(data, date_str, chapters):
+    """Bouw shownotes op uit agendapunten, hoofdstukken en verantwoording."""
     topics = data.get("topics", [])
-    if not topics:
-        return f"Vergadering gemeente Texel, {date_str}."
-    regels = [f"Vergadering gemeente Texel\n{date_str}\n\nAgenda:"]
-    for t in topics:
-        titel = t.get("title", "").strip()
-        if titel:
-            regels.append(f"• {titel}")
+    regels = [f"Vergadering gemeente Texel\n{date_str}"]
+
+    if topics:
+        regels.append("\nAgenda:")
+        for t in topics:
+            titel = t.get("title", "").strip()
+            if titel:
+                regels.append(f"• {titel}")
+
+    if chapters:
+        regels.append("\nHoofdstukken:")
+        for ch in chapters:
+            h = int(ch["start_sec"] // 3600)
+            m = int((ch["start_sec"] % 3600) // 60)
+            s = int(ch["start_sec"] % 60)
+            ts = f"{h}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
+            regels.append(f"• {ts} {ch['titel']}")
+
+    regels.append(f"\n{VERANTWOORDING}")
     return "\n".join(regels)
 
 
@@ -449,10 +463,11 @@ def update_rss_feed(episodes):
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 <channel>
   <title>Raadslens Texel</title>
-  <description>Vergaderingen van de gemeente Texel - automatisch als podcast</description>
+  <description>{PODCAST_BESCHRIJVING}</description>
   <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
   <language>nl</language>
   <itunes:author>Raadslens</itunes:author>
+  <itunes:summary>{PODCAST_BESCHRIJVING}</itunes:summary>
   <itunes:image href="{LOGO_URL}"/>
   <image>
     <url>{LOGO_URL}</url>
@@ -500,10 +515,6 @@ def main():
         full_title = f"{vergadering_type} {dt.day:02d}-{dt.month:02d}-{dt.year}"
         log(f"Verwerken: {full_title}")
 
-        # Shownotes
-        description = build_shownotes(data, date_str)
-        log(f"Shownotes: {len(data.get('topics', []))} agendapunten")
-
         # Intro-duur bepalen
         intro_sec = get_intro_duration(data)
 
@@ -528,7 +539,7 @@ def main():
         processed = f"audio/{date_id}.mp3"
         silences = remove_silences(trimmed_audio, processed)
 
-        # Hoofdstuktijden corrigeren voor intro + schorsingen
+        # Hoofdstuktijden corrigeren en inbrengen
         if chapters:
             chapters = correct_chapter_times(chapters, intro_sec, silences)
             add_chapters_to_mp3(processed, chapters)
@@ -546,20 +557,11 @@ def main():
         if not audio_url:
             continue
 
+        # Shownotes met agenda, hoofdstukken en verantwoording
+        description = build_shownotes(data, date_str, chapters)
+
         # RSS bijwerken
         episodes = load_episodes()
-
-        # Shownotes uitbreiden met hoofdstukken
-        if chapters:
-            hoofdstuk_regels = ["\n\nHoofdstukken:"]
-            for ch in chapters:
-                h = int(ch["start_sec"] // 3600)
-                m = int((ch["start_sec"] % 3600) // 60)
-            s = int(ch["start_sec"] % 60)
-            ts = f"{h}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
-            hoofdstuk_regels.append(f"• {ts} {ch['titel']}")
-            description += "\n".join(hoofdstuk_regels)
-
         episodes.insert(0, {
             "id": date_id,
             "title": full_title,
