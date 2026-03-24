@@ -7,28 +7,38 @@
   <language>nl</language>
   <itunes:author>Gemeente Texel</itunes:author>
   <itunes:category text="Government"/>
- <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
-<image>
-  <url>https://raadslens-creator.github.io/texel-raad-podcast/logo.png</url>
-  <title>Gemeenteraad Texel</title>
-  <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
-</image>
+  <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
+  <image>
+    <url>https://raadslens-creator.github.io/texel-raad-podcast/logo.png</url>
+    <title>Gemeenteraad Texel</title>
+    <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
+  </image>
+  <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Raadsvergadering Texel - 23 maart 2026</title>
+    <title>Raadsvergadering Texel - 18 februari 2026</title>
     <description><![CDATA[Raadsvergadering gemeente Texel
-23 maart 2026
+18 februari 2026
 
 Agenda:
 • 1 Opening en mededelingen
 • 2 Vaststelling agenda
-• 3 Duiding van de uitslag van de gemeenteraadsverkiezingen, formatieproces en bestuursprogramma
-• 4 Gewenste kenmerken en competenties van verkenner(s); gesprek over opdracht aan de verkenner
-• 5 Rondvraag
-• 6 Sluiting]]></description>
-    <pubDate>Mon, 23 Mar 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://github.com/raadslens-creator/texel-raad-podcast/releases/download/vergadering-20260323_1/20260323_1.mp3" type="audio/mpeg" length="17046405"/>
-    <guid isPermaLink="false">20260323_1</guid>
-    <itunes:duration>0:29:25</itunes:duration>
+• 3 Rondvraag
+• 4 BESPREEKSTUK - Sloop voormalige karthal De Koog (II)
+• 5 BESPREEKSTUK - Zienswijze Kadernota 2027 Omgevingsdienst NHN
+• 6 Motie D66, PvdA pro Texel en GroenLinks: Een registratietermijn van 6 maanden bij schuldenregelingen
+• 7 Motie PvdA pro Texel, VVD Texel, Hart voor Texel en D66 Texel: Inzet voor Deuce
+• 8 D66, GroenLinks Texel en PvdA pro Texel - Ondersteuningsverklaring van de motie: ‘Laat Schiermonnikoog niet verzuipen!’
+• 9 HAMERSTUK - Zienswijze op de Kadernota 2027 Veiligheidsregio Noord-Holland Noord
+• 10 HAMERSTUK - Zienswijze Kadernota 2027 GR Regionaal Historisch Centrum Alkmaar / Regionaal Archief (GR RHCA)
+• 11 HAMERSTUK - Zienswijze Kadernota GR GGD
+• 12 HAMERSTUK - 7de wijziging van de GR GGD HN
+• 13 HAMERSTUK - Gemeenschappelijke Regeling Archeologie Westfriese Gemeenten - toestemming voor vaststelling
+• 14 Ruimte voor (nog openstaande) vragen vanuit de Rondvraag
+• 15 Sluiting]]></description>
+    <pubDate>Wed, 18 Feb 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://github.com/raadslens-creator/texel-raad-podcast/releases/download/vergadering-20260218_1/20260218_1.mp3" type="audio/mpeg" length="40228125"/>
+    <guid isPermaLink="false">20260218_1</guid>
+    <itunes:duration>1:06:50</itunes:duration>
   </item>
 </channel>
 </rss>
