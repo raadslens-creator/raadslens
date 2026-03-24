@@ -207,7 +207,7 @@ def create_github_release(date_id, title, date_str, audio_file):
         f"https://api.github.com/repos/{REPO}/releases",
         data=release_data, headers=headers, method="POST",
     )
-try:
+    try:
         with urllib.request.urlopen(req) as resp:
             release = json.loads(resp.read())
     except urllib.error.HTTPError as e:
