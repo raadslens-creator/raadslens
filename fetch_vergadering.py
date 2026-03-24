@@ -4,13 +4,18 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROYALCAST_API = "https://channel.royalcast.com/portal/api/1.0/gemeentetexel/webcasts/gemeentetexel"
-ROYALCAST_LANDING = "https://sdk.companywebcast.com/players/727d609c-cd68-49db-b4af-ee8170f2d21f/stream/hls"
 SEEN_FILE = Path("docs/seen.json")
 FEED_FILE = Path("docs/feed.xml")
 REPO = os.environ.get("GITHUB_REPOSITORY", "")
 GITHUB_TOKEN = os.environ.get("GH_TOKEN", "")
 SILENCE_THRESHOLD_DB = "-35dB"
 SILENCE_MIN_DURATION = 45
+
+MAANDEN = {
+    1: "januari", 2: "februari", 3: "maart", 4: "april",
+    5: "mei", 6: "juni", 7: "juli", 8: "augustus",
+    9: "september", 10: "oktober", 11: "november", 12: "december"
+}
 
 
 def log(msg):
@@ -29,8 +34,11 @@ def get_recent_webcast_ids():
     return ids
 
 
-def check_webcast_exists(date_id):
-    """Controleer of een webcast beschikbaar is via de API."""
+def check_and_fetch_webcast(date_id):
+    """
+    Controleer of een webcast beschikbaar is via de API.
+    Geeft de volledige API-response terug als die beschikbaar is, anders None.
+    """
     url = f"{ROYALCAST_API}/{date_id}?method=GET&key="
     log(f"Controleren: {url}")
     try:
@@ -39,15 +47,15 @@ def check_webcast_exists(date_id):
             data = json.loads(resp.read())
             if data.get("id") or data.get("webcastId") or data.get("webcstId"):
                 log(f"Gevonden!")
-                return True
+                return data
             log(f"Leeg antwoord")
-            return False
+            return None
     except urllib.error.HTTPError as e:
         log(f"Niet beschikbaar: {e.code}")
-        return False
+        return None
     except Exception as e:
         log(f"Fout: {e}")
-        return False
+        return None
 
 
 def load_seen():
@@ -61,19 +69,8 @@ def save_seen(seen):
     SEEN_FILE.write_text(json.dumps(seen, indent=2))
 
 
-def download_audio(date_id):
-    """Download audio via directe MP3 link uit de API."""
-    api_url = f"https://channel.royalcast.com/portal/api/1.0/gemeentetexel/webcasts/gemeentetexel/{date_id}?method=GET&key="
-    log(f"API ophalen: {api_url}")
-    try:
-        req = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read())
-    except Exception as e:
-        log(f"API fout: {e}")
-        return None
-
-    # Zoek MP3 in attachments
+def download_audio(date_id, data):
+    """Download audio via directe MP3 of MP4 link uit de API."""
     mp3_url = None
     mp4_url = None
     for att in data.get("attachments", []):
@@ -81,7 +78,7 @@ def download_audio(date_id):
         loc = att.get("location", "")
         if "audio/mpeg" in ct or loc.endswith(".mp3"):
             mp3_url = loc
-            log(f"MP3 gevonden: {loc[:80]}...")
+            log(f"MP3 gevonden")
             break
         if "video/mp4" in ct or loc.endswith(".mp4"):
             mp4_url = loc
@@ -93,8 +90,9 @@ def download_audio(date_id):
 
     output = f"audio/{date_id}_raw.mp3"
     Path("audio").mkdir(exist_ok=True)
-    log(f"Downloaden: {download_url[:80]}...")
+    log(f"Downloaden...")
 
+    # Probeer eerst yt-dlp
     cmd = [
         "yt-dlp",
         "--extract-audio", "--audio-format", "mp3",
@@ -105,12 +103,10 @@ def download_audio(date_id):
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        log(f"yt-dlp fout:\n{result.stderr[-500:]}")
-        # Fallback: wget
-        log("Fallback: directe download proberen...")
+        log(f"yt-dlp fout - directe download proberen...")
         try:
             req = urllib.request.Request(download_url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with urllib.request.urlopen(req, timeout=300) as resp:
                 with open(output, "wb") as f:
                     f.write(resp.read())
         except Exception as e:
@@ -118,10 +114,11 @@ def download_audio(date_id):
             return None
 
     if not Path(output).exists():
-        log("Bestand niet gevonden")
+        log("Bestand niet gevonden na download")
         return None
     log(f"Download OK ({Path(output).stat().st_size / 1024 / 1024:.1f} MB)")
     return output
+
 
 def remove_silences(input_file, output_file):
     log("Stiltedetectie...")
@@ -174,6 +171,21 @@ def remove_silences(input_file, output_file):
         return []
     log(f"Geknipt: {Path(output_file).stat().st_size / 1024 / 1024:.1f} MB")
     return silences
+
+
+def build_shownotes(data, date_str):
+    """Bouw shownotes op uit agendapunten."""
+    topics = data.get("topics", [])
+    if not topics:
+        return f"Raadsvergadering gemeente Texel, {date_str}."
+
+    regels = [f"Raadsvergadering gemeente Texel\n{date_str}\n\nAgenda:"]
+    for t in topics:
+        titel = t.get("title", "").strip()
+        if titel:
+            regels.append(f"• {titel}")
+
+    return "\n".join(regels)
 
 
 def create_github_release(date_id, title, date_str, audio_file):
@@ -239,6 +251,7 @@ def update_rss_feed(episodes):
     FEED_FILE.parent.mkdir(parents=True, exist_ok=True)
     items = ""
     for ep in episodes:
+        desc = ep.get("description", ep["title"]).replace("&", "&amp;")
         items += f"""
   <item>
     <title>{ep['title']}</title>
@@ -276,13 +289,16 @@ def main():
         if date_id in seen:
             continue
 
-        if not check_webcast_exists(date_id):
+        data = check_and_fetch_webcast(date_id)
+        if not data:
             continue
 
         new_found = True
+
+        # Nederlandse datum
         try:
             dt = datetime.strptime(date_id[:8], "%Y%m%d")
-            date_str = dt.strftime("%d %B %Y")
+            date_str = f"{dt.day} {MAANDEN[dt.month]} {dt.year}"
             pub_date = dt.strftime("%a, %d %b %Y 03:00:00 +0000")
         except Exception:
             date_str = "onbekend"
@@ -291,15 +307,22 @@ def main():
         full_title = f"Raadsvergadering Texel - {date_str}"
         log(f"Verwerken: {full_title}")
 
-        raw_audio = download_audio(date_id)
+        # Shownotes
+        description = build_shownotes(data, date_str)
+        log(f"Shownotes: {len(data.get('topics', []))} agendapunten")
+
+        # Download
+        raw_audio = download_audio(date_id, data)
         if not raw_audio:
             seen.append(date_id)
             save_seen(seen)
             continue
 
+        # Stiltes verwijderen
         processed = f"audio/{date_id}.mp3"
         remove_silences(raw_audio, processed)
 
+        # Duur bepalen
         try:
             from mutagen.mp3 import MP3
             secs = int(MP3(processed).info.length)
@@ -307,15 +330,19 @@ def main():
         except Exception:
             duration_str = ""
 
+        # GitHub Release
         audio_url = create_github_release(date_id, full_title, date_str, processed)
         if not audio_url:
             continue
 
+        # RSS bijwerken
         episodes = load_episodes()
         episodes.insert(0, {
-            "id": date_id, "title": full_title,
-            "description": f"Raadsvergadering gemeente Texel, {date_str}.",
-            "audio_url": audio_url, "pub_date": pub_date,
+            "id": date_id,
+            "title": full_title,
+            "description": description,
+            "audio_url": audio_url,
+            "pub_date": pub_date,
             "size": Path(processed).stat().st_size,
             "duration": duration_str,
         })
