@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 <channel>
-  <title>Gemeenteraad Texel</title>
-  <description>Raadsvergaderingen van de gemeente Texel</description>
+  <title>Raadslens Texel</title>
+  <description>Vergaderingen van de gemeente Texel - automatisch als podcast</description>
   <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
   <language>nl</language>
-  <itunes:author>Gemeente Texel</itunes:author>
-  <itunes:category text="Government"/>
+  <itunes:author>Raadslens</itunes:author>
   <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
   <image>
     <url>https://raadslens-creator.github.io/texel-raad-podcast/logo.png</url>
-    <title>Gemeenteraad Texel</title>
+    <title>Raadslens Texel</title>
     <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
   </image>
+  <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Raadsvergadering Texel - 18 februari 2026</title>
-    <description><![CDATA[Raadsvergadering gemeente Texel
+    <title>Raadsvergadering 18-02-2026</title>
+    <description><![CDATA[Vergadering gemeente Texel
 18 februari 2026
 
 Agenda:
@@ -34,11 +34,15 @@ Agenda:
 • 12 HAMERSTUK - 7de wijziging van de GR GGD HN
 • 13 HAMERSTUK - Gemeenschappelijke Regeling Archeologie Westfriese Gemeenten - toestemming voor vaststelling
 • 14 Ruimte voor (nog openstaande) vragen vanuit de Rondvraag
-• 15 Sluiting]]></description>
+• 15 Sluiting
+
+Hoofdstukken:
+• 1:02:18 15 Sluiting]]></description>
     <pubDate>Wed, 18 Feb 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://github.com/raadslens-creator/texel-raad-podcast/releases/download/vergadering-20260218_1/20260218_1.mp3" type="audio/mpeg" length="40228125"/>
+    <enclosure url="https://github.com/raadslens-creator/texel-raad-podcast/releases/download/vergadering-20260218_1/20260218_1.mp3" type="audio/mpeg" length="36624993"/>
     <guid isPermaLink="false">20260218_1</guid>
     <itunes:duration>1:06:50</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
   </item>
 </channel>
 </rss>
