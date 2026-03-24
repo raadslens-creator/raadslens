@@ -7,7 +7,12 @@
   <language>nl</language>
   <itunes:author>Gemeente Texel</itunes:author>
   <itunes:category text="Government"/>
-  <itunes:explicit>false</itunes:explicit>
+ <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
+<image>
+  <url>https://raadslens-creator.github.io/texel-raad-podcast/logo.png</url>
+  <title>Gemeenteraad Texel</title>
+  <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
+</image>
   <item>
     <title>Raadsvergadering Texel - 23 maart 2026</title>
     <description><![CDATA[Raadsvergadering gemeente Texel
