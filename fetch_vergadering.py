@@ -207,10 +207,25 @@ def create_github_release(date_id, title, date_str, audio_file):
         f"https://api.github.com/repos/{REPO}/releases",
         data=release_data, headers=headers, method="POST",
     )
-    with urllib.request.urlopen(req) as resp:
-        release = json.loads(resp.read())
+try:
+        with urllib.request.urlopen(req) as resp:
+            release = json.loads(resp.read())
+    except urllib.error.HTTPError as e:
+        if e.code == 422:
+            log("Release bestaat al - bestaande release ophalen...")
+            req2 = urllib.request.Request(
+                f"https://api.github.com/repos/{REPO}/releases/tags/vergadering-{date_id}",
+                headers={
+                    "Authorization": f"token {GITHUB_TOKEN}",
+                    "Accept": "application/vnd.github+json",
+                }
+            )
+            with urllib.request.urlopen(req2) as resp:
+                release = json.loads(resp.read())
+        else:
+            raise
     upload_url = release["upload_url"].replace("{?name,label}", "")
-    log(f"Release aangemaakt: {release['html_url']}")
+    log(f"Release aangemaakt/gevonden: {release['html_url']}")
     upload_headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github+json",
