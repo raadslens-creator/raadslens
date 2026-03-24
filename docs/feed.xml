@@ -8,5 +8,13 @@
   <itunes:author>Gemeente Texel</itunes:author>
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
+  <item>
+    <title>Raadsvergadering Texel - 23 March 2026</title>
+    <description><![CDATA[Raadsvergadering gemeente Texel, 23 March 2026.]]></description>
+    <pubDate>Mon, 23 Mar 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://github.com/raadslens-creator/texel-raad-podcast/releases/download/vergadering-20260323_1/20260323_1.mp3" type="audio/mpeg" length="17046405"/>
+    <guid isPermaLink="false">20260323_1</guid>
+    <itunes:duration>0:29:25</itunes:duration>
+  </item>
 </channel>
 </rss>
