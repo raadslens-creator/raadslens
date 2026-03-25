@@ -269,6 +269,38 @@ CORRECTIES = {
     "Vitser": "Visser",
     "Meneer Rutte": "Meneer Rutten",
 
+    # Correcties 23-03 vergadering
+    "Raadse Commissieverraderingen": "raadscommissievergaderingen",
+    "toegeinventariseerd": "geïnventariseerd",
+    "invilling": "invulling",
+    "Poldemann": "Polderman",
+    "testblank": "Texels Belang",
+    "pregestoel": "spreekgestoelte",
+    "catheders": "katheder",
+    "Koijman": "Kooiman",
+    "PvdA Proot-Texel": "PvdA pro Texel",
+    "PVDA Proot-Texel": "PvdA pro Texel",
+    "proot-Texel": "pro Texel",
+    "verkiezingsuitstag": "verkiezingsuitslag",
+    "meerderheidskoalitie": "meerderheidscoalitie",
+    "huisheid": "wijsheid",
+    "volkeur": "voorkeur",
+    "geschiedeningsboeken": "geschiedenisboeken",
+    "voortvaarderheid": "voortvarendheid",
+    "plaatszinden": "plaatsvinden",
+    "informatieproces overstaan": "informatieproces overslaan",
+    "beenkomst": "bijeenkomst",
+    "verkender": "verkenner",
+    "Tessels belang": "Texels Belang",
+    "Tessels Belang": "Texels Belang",
+    "slikker": "slikken",
+    "groterwoordende": "groter wordende",
+    "vermogelijk": "doenlijk",
+    "waart ons zorgen": "baart ons zorgen",
+    "Fisser": "Visser",
+    "helder signal": "helder signaal",
+    "steunverklading": "steunverklaring",
+
     # Nieuwe correcties 25-03-2026 ronde 2
     "Juus": "Deuce",
     "Meneer Lutten": "Meneer Rutten",
@@ -853,23 +885,8 @@ def get_webcast_data(date_id):
 
 
 def get_intro_duration(data):
-    actual_start = parse_royalcast_timestamp(data.get("actualStart"))
-    if not actual_start:
-        return 0
-    earliest_event = None
-    for topic in data.get("topics", []):
-        for event in topic.get("events", []):
-            event_start = parse_royalcast_timestamp(event.get("start"))
-            if event_start and (earliest_event is None or event_start < earliest_event):
-                earliest_event = event_start
-    if not earliest_event:
-        return 0
-    intro_sec = max(0, earliest_event - actual_start)
-    if intro_sec > 120:
-        log(f"Intro van {intro_sec:.0f}s lijkt te lang - op 0 gezet")
-        return 0
-    log(f"Intro: {intro_sec:.0f}s")
-    return intro_sec
+    """Intro-knip uitgeschakeld - sprekerherkenning is uitgeschakeld."""
+    return 0
 
 
 def detect_silences(audio_file, threshold_db="-35dB", min_duration=45):
@@ -1044,7 +1061,11 @@ def transcribe_audio(audio_file, vocabulary):
         beam_size=3,
         initial_prompt=vocabulary,
         vad_filter=True,
-        vad_parameters=dict(min_silence_duration_ms=500)
+        vad_parameters=dict(
+            min_silence_duration_ms=500,
+            speech_pad_ms=400,
+            threshold=0.3,
+        )
     )
     log(f"Taal gedetecteerd: {info.language} ({info.language_probability:.0%})")
     result = []
