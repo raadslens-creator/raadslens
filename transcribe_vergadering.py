@@ -210,6 +210,30 @@ CORRECTIES = {
     "lepelhaar": "lepelaar",
     "Inzet for Deuce": "Inzet voor Deuce",
     "inzet for Deuce": "inzet voor Deuce",
+    "inzet voor juice": "inzet voor Deuce",
+    "Inzet voor juice": "Inzet voor Deuce",
+    "Tessels Sportvereniging": "Texelse sportvereniging",
+    "Tessels Deuce": "Texelse Deuce",
+    "Sportpark de Burg Zuid": "Sportpark Den Burg Zuid",
+    "sportpark Demberg-Zuid": "Sportpark Den Burg Zuid",
+    "college-testel": "college, Texel",
+    "beoevernen": "beoefenen",
+    "sportal": "sporthal",
+    "volwaarden": "voorwaarden",
+    "Kiescom Pass": "Kieskompas",
+    "kiescom pass": "kieskompas",
+    "Zinjaal": "signaal",
+    "signal": "signaal",
+    "Kadernoten": "Kadernota",
+    "de Kog": "De Koog",
+    "Texel-se": "Texelse",
+    "gemeenteraat": "gemeenteraad",
+    "commissievoort": "commissie voort",
+    "omaatwerk": "om maatwerk",
+    "honderden lenen": "honderden leden",
+    "elitistijdsvraag": "elektriciteitsvraag",
+    "PVDA protest al": "PvdA pro Texel",
+    "PVDA protestus": "PvdA pro Texel",
 }
 
 # Achternamen die zeker kloppen
@@ -791,7 +815,12 @@ def get_intro_duration(data):
                 earliest_event = event_start
     if not earliest_event:
         return 0
-    return max(0, earliest_event - actual_start)
+    intro_sec = max(0, earliest_event - actual_start)
+    if intro_sec > 120:
+        log(f"Intro van {intro_sec:.0f}s lijkt te lang - op 0 gezet")
+        return 0
+    log(f"Intro: {intro_sec:.0f}s")
+    return intro_sec
 
 
 def detect_silences(audio_file, threshold_db="-35dB", min_duration=45):
@@ -1016,13 +1045,6 @@ def main():
     vocab_cache = load_vocabulary_cache()
     log(f"Naam-cache: {len(namen_cache)} bekende namen")
     log(f"Vocabulary cache: {len(vocab_cache.get('woorden', []))} historische woorden")
-
-    # Historische ondertitelingen ophalen (max 5 per run om tijd te sparen)
-    vergaderingen_verwerkt = len(vocab_cache.get("vergaderingen_verwerkt", []))
-    if vergaderingen_verwerkt < 30:
-        log("Historische ondertitelingen ophalen...")
-        vocab_cache = update_vocabulary_uit_ondertitelingen(vocab_cache, max_vergaderingen=5)
-        save_vocabulary_cache(vocab_cache)
 
     # Bepaal welke vergadering
     if DATE_ID:
