@@ -234,6 +234,21 @@ CORRECTIES = {
     "elitistijdsvraag": "elektriciteitsvraag",
     "PVDA protest al": "PvdA pro Texel",
     "PVDA protestus": "PvdA pro Texel",
+
+    # Nieuwe correcties 25-03-2026 ronde 2
+    "Juus": "Deuce",
+    "Meneer Lutten": "Meneer Rutten",
+    "hard voor tessel": "Hart voor Texel",
+    "portefeuillader": "portefeuillehouder",
+    "rageer akkoord": "regeerakkoord",
+    "Edel Koijman": "Edo Kooiman",
+    "Gewaarses en motie": "Gewaardeerde motie",
+    "oploep": "oproep",
+    "gesugreerd": "gesuggereerd",
+    "diktenpunten": "dictum punten",
+    "ditum": "dictum",
+    "deektum": "dictum",
+    "dictum": "dictum",
 }
 
 # Achternamen die zeker kloppen
@@ -891,6 +906,87 @@ def correct_speaker_times(speakers, intro_sec, silences):
     return corrected
 
 
+
+
+def get_ibabs_agenda_id(date_id):
+    """Zoek de iBabs agenda-ID op basis van de vergaderdatum."""
+    try:
+        dt = datetime.strptime(date_id[:8], '%Y%m%d')
+        jaar = dt.year
+        maand = dt.month
+        dag = dt.day
+        datum_str = f'{dag} {["januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"][maand-1]}'
+
+        url = f'{IBABS_BASE}/Calendar?year={jaar}&month={maand}'
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+
+        # Zoek vergaderingen op de juiste datum
+        # Pattern: datum staat vlak voor de agenda-ID link
+        pattern = rf'{dag}[^<]{{0,50}}?/Agenda/Index/([a-f0-9-]{{36}})'
+        matches = re.findall(pattern, html, re.DOTALL)
+        if matches:
+            log(f'iBabs agenda-ID gevonden: {matches[0]}')
+            return matches[0]
+
+        # Fallback: zoek alle agenda-IDs en check de datum in de paginatekst
+        alle_ids = re.findall(r'/Agenda/Index/([a-f0-9-]{36})', html)
+        for agenda_id in alle_ids:
+            try:
+                page_url = f'{IBABS_BASE}/Agenda/Index/{agenda_id}'
+                req2 = urllib.request.Request(page_url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req2, timeout=10) as resp2:
+                    page_html = resp2.read().decode('utf-8', errors='ignore')
+                if datum_str in page_html and str(jaar) in page_html:
+                    log(f'iBabs agenda-ID gevonden via fallback: {agenda_id}')
+                    return agenda_id
+            except Exception:
+                pass
+        return None
+    except Exception as e:
+        log(f'iBabs agenda-ID ophalen mislukt: {e}')
+        return None
+
+
+def get_ibabs_speakers(agenda_id):
+    """
+    Haal sprekerdata op van bestuurlijkeinformatie.nl.
+    Geeft lijst van (start_sec, end_sec, naam) tuples.
+    Timestamps zijn relatief aan begin van de uitzending.
+    """
+    if not agenda_id:
+        return []
+    try:
+        url = f'{IBABS_BASE}/Agenda/Index/{agenda_id}'
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+
+        # Pattern: HH:MM:SS - HH:MM:SS - Naam
+        pattern = r"(\d{2}:\d{2}:\d{2}) - (\d{2}:\d{2}:\d{2}) - ([A-Za-z][^\n<]{2,50}?)(?=\s*(?:<|\n|00:|$))"
+        matches = re.findall(pattern, html)
+
+        speakers = []
+        for start_str, end_str, naam in matches:
+            naam = naam.strip()
+            if not naam or len(naam) < 3:
+                continue
+            # Converteer HH:MM:SS naar seconden
+            def to_sec(t):
+                h, m, s = t.split(':')
+                return int(h) * 3600 + int(m) * 60 + int(s)
+            start_sec = to_sec(start_str)
+            end_sec = to_sec(end_str)
+            speakers.append((start_sec, end_sec, naam))
+
+        speakers.sort(key=lambda x: x[0])
+        log(f'iBabs: {len(speakers)} spreekbeurten voor {len(set(s[2] for s in speakers))} sprekers')
+        return speakers
+    except Exception as e:
+        log(f'iBabs sprekers ophalen mislukt: {e}')
+        return []
+
 def find_speaker_at(timestamp, speakers):
     for start, end, naam in speakers:
         if start <= timestamp <= end:
@@ -1093,13 +1189,23 @@ def main():
     silences = detect_silences(audio_file)
     log(f"{len(silences)} schorsingen gevonden")
 
-    # Sprekerdata
-    raw_speakers = get_speaker_timeline(data)
-    if raw_speakers:
-        speakers = correct_speaker_times(raw_speakers, intro_sec, silences)
-        log(f"Spreker-tijden gecorrigeerd")
+    # Sprekerdata - eerst iBabs proberen, dan RoyalCast als fallback
+    ibabs_id = get_ibabs_agenda_id(date_id)
+    ibabs_speakers = get_ibabs_speakers(ibabs_id)
+
+    if ibabs_speakers:
+        # iBabs timestamps zijn direct bruikbaar - geen correctie nodig
+        speakers = ibabs_speakers
+        log(f"Sprekers via iBabs geladen")
     else:
-        speakers = []
+        # Fallback naar RoyalCast API
+        log("iBabs niet beschikbaar - RoyalCast als fallback")
+        raw_speakers = get_speaker_timeline(data)
+        if raw_speakers:
+            speakers = correct_speaker_times(raw_speakers, intro_sec, silences)
+            log(f"Spreker-tijden gecorrigeerd via RoyalCast")
+        else:
+            speakers = []
 
     # Transcriberen
     segments = transcribe_audio(audio_file, vocabulary)
