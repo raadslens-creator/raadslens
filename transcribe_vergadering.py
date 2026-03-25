@@ -1060,12 +1060,7 @@ def transcribe_audio(audio_file, vocabulary):
         language="nl",
         beam_size=3,
         initial_prompt=vocabulary,
-        vad_filter=True,
-        vad_parameters=dict(
-            min_silence_duration_ms=500,
-            speech_pad_ms=400,
-            threshold=0.3,
-        )
+        vad_filter=False
     )
     log(f"Taal gedetecteerd: {info.language} ({info.language_probability:.0%})")
     result = []
