@@ -235,6 +235,40 @@ CORRECTIES = {
     "PVDA protest al": "PvdA pro Texel",
     "PVDA protestus": "PvdA pro Texel",
 
+    # Correcties 25-03-2026 ronde 3
+    "hooghaarden": "Hoogerheide",
+    "mevrouw Vitser": "mevrouw Visser",
+    "kopgemeters": "kopgemeenten",
+    "gemeenters": "gemeenten",
+    "griefer": "griffier",
+    "eenstans": "eens",
+    "geprecenteerd": "gepresenteerd",
+    "controlsicheres": "planning en control cyclus",
+    "hangeizers": "hete hangijzers",
+    "klezen": "college",
+    "gesugreerd": "gesuggereerd",
+    "gesugureerd": "gesuggereerd",
+    "overbodigd": "overbodig",
+    "tevage": "te vage",
+    "megengeven": "meegegeven",
+    "willentijd": "welwillendheid",
+    "struikoplok": "struikelblok",
+    "indienis": "indieners",
+    "woorspel": "woordenspel",
+    "demening": "de mening",
+    "kogend water": "kokend water",
+    "sorteerd": "gesorteerd",
+    "voortleggen": "voorleggen",
+    "lovijs": "lovijzen",
+    "lovijzen": "voor",
+    "stemmaanvaart": "stemmen aanvaard",
+    "ongewijzig": "ongewijzigd",
+    "woordenwegerij": "woordenstrijd",
+    "eerstans": "eens",
+    "handhafingsstrategie": "handhavingsstrategie",
+    "Vitser": "Visser",
+    "Meneer Rutte": "Meneer Rutten",
+
     # Nieuwe correcties 25-03-2026 ronde 2
     "Juus": "Deuce",
     "Meneer Lutten": "Meneer Rutten",
@@ -1033,11 +1067,22 @@ def format_timestamp(sec):
     return f"{h:02d}:{m:02d}:{s:02d}"
 
 
+
+DISCLAIMER_TRANSCRIPTIE = (
+    "Deze transcriptie is automatisch gegenereerd door Raadslens en kan fouten bevatten. "
+    "Raadslens is niet verantwoordelijk voor de inhoud van de vergadering of de "
+    "nauwkeurigheid van de transcriptie. De officiële verslaggeving is te vinden op "
+    "texel.bestuurlijkeinformatie.nl."
+)
+
+
 def build_transcript(segments, speakers, data, date_str):
     lines = []
     lines.append("RAADSVERGADERING TEXEL")
     lines.append(date_str)
     lines.append("=" * 60)
+    lines.append("")
+    lines.append(f"[ {DISCLAIMER_TRANSCRIPTIE} ]")
     lines.append("")
 
     topics = data.get("topics", []) if data else []
@@ -1189,23 +1234,9 @@ def main():
     silences = detect_silences(audio_file)
     log(f"{len(silences)} schorsingen gevonden")
 
-    # Sprekerdata - eerst iBabs proberen, dan RoyalCast als fallback
-    ibabs_id = get_ibabs_agenda_id(date_id)
-    ibabs_speakers = get_ibabs_speakers(ibabs_id)
-
-    if ibabs_speakers:
-        # iBabs timestamps zijn direct bruikbaar - geen correctie nodig
-        speakers = ibabs_speakers
-        log(f"Sprekers via iBabs geladen")
-    else:
-        # Fallback naar RoyalCast API
-        log("iBabs niet beschikbaar - RoyalCast als fallback")
-        raw_speakers = get_speaker_timeline(data)
-        if raw_speakers:
-            speakers = correct_speaker_times(raw_speakers, intro_sec, silences)
-            log(f"Spreker-tijden gecorrigeerd via RoyalCast")
-        else:
-            speakers = []
+    # Sprekerherkenning tijdelijk uitgeschakeld - timing-probleem nog niet opgelost
+    speakers = []
+    log("Sprekerherkenning uitgeschakeld")
 
     # Transcriberen
     segments = transcribe_audio(audio_file, vocabulary)
