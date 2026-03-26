@@ -24,6 +24,15 @@ MAANDEN = {
     9: "september", 10: "oktober", 11: "november", 12: "december"
 }
 
+# Handmatige mapping van date_id naar iBabs agenda-ID
+# Vul aan als de automatische koppeling niet werkt
+IBABS_ID_MAPPING = {
+    "20260218_1": "acb3b1b7-db21-463d-863f-bc48af364882",
+    "20260323_1": "4a8be1a5-97dd-4d90-b90c-7aa780c893f3",
+    "20260331_1": "c15f1ab0-f3b1-4d9c-ae6e-07ab8b1ce32b",
+    "20260401_1": "167b14c9-3ec1-42b7-b40a-71fae1fe886d",
+}
+
 DISCLAIMER_OFFICIEEL = (
     "Deze transcriptie is de officiële uitgeschreven ondertiteling van de vergadering, "
     "beschikbaar gesteld via texel.bestuurlijkeinformatie.nl. "
@@ -63,37 +72,59 @@ def get_tijdelijke_transcripties():
 
 
 def get_ibabs_agenda_id(date_id):
-    """Zoek de iBabs agenda-ID op basis van vergaderdatum."""
+    """Zoek de iBabs agenda-ID - eerst handmatige mapping, dan automatisch."""
+    if date_id in IBABS_ID_MAPPING:
+        log(f"  iBabs ID via mapping: {IBABS_ID_MAPPING[date_id]}")
+        return IBABS_ID_MAPPING[date_id]
+
+    # Automatisch opzoeken via kalender
+    # Sla gevonden IDs op voor toekomstig gebruik
+    gevonden = _zoek_ibabs_id_automatisch(date_id)
+    if gevonden:
+        # Voeg toe aan mapping voor volgende keer
+        IBABS_ID_MAPPING[date_id] = gevonden
+    return gevonden
+
+
+def _zoek_ibabs_id_automatisch(date_id):
+    """Zoek iBabs agenda-ID automatisch op basis van datum."""
     try:
         dt = datetime.strptime(date_id[:8], "%Y%m%d")
         jaar = dt.year
         maand = dt.month
         dag = dt.day
+        maand_naam = MAANDEN[maand]
 
+        # Zoek in de kalender voor dit jaar/maand
         url = f"{IBABS_BASE}/Calendar?year={jaar}&month={maand}"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=15) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
 
-        # Zoek vergaderingen rondom de juiste datum
-        pattern = rf'{dag}[^<]{{0,100}}?/Agenda/Index/([a-f0-9-]{{36}})'
-        matches = re.findall(pattern, html, re.DOTALL)
-        if matches:
-            return matches[0]
-
-        # Fallback: alle agenda-IDs ophalen en op datum checken
+        # Zoek alle agenda-IDs op de pagina
         alle_ids = list(set(re.findall(r'/Agenda/Index/([a-f0-9-]{36})', html)))
-        datum_str = f"{dag} {MAANDEN[maand]}"
-        for agenda_id in alle_ids[:10]:
+
+        # Controleer elke ID op de juiste datum
+        # iBabs toont datums als "woensdag 18 februari 2026" of "18 februari 2026"
+        datum_patronen = [
+            f"{dag} {maand_naam} {jaar}",
+            f"{dag:02d} {maand_naam} {jaar}",
+        ]
+
+        for agenda_id in alle_ids[:15]:
             try:
                 page_url = f"{IBABS_BASE}/Agenda/Index/{agenda_id}"
                 req2 = urllib.request.Request(page_url, headers={"User-Agent": "Mozilla/5.0"})
                 with urllib.request.urlopen(req2, timeout=10) as resp2:
                     page_html = resp2.read().decode("utf-8", errors="ignore")
-                if datum_str in page_html and str(jaar) in page_html:
-                    return agenda_id
+                for patroon in datum_patronen:
+                    if patroon in page_html:
+                        log(f"  iBabs ID automatisch gevonden: {agenda_id} ({patroon})")
+                        return agenda_id
             except Exception:
                 pass
+
+        log(f"  Geen iBabs ID gevonden voor {date_id}")
         return None
     except Exception as e:
         log(f"Agenda-ID ophalen mislukt: {e}")
