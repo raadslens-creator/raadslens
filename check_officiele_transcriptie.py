@@ -157,6 +157,26 @@ def fetch_officiele_ondertiteling(agenda_id):
     2. Alle documentIds op de pagina proberen (PDF check op inhoud)
     Geeft (pdf_bytes, url) of (None, None) als niet beschikbaar.
     """
+    # Controleer bekende document-ID mapping voor directe download
+    doc_key = f"{GEMEENTE_ID}_{agenda_id.replace(IBABS_BASE, '')}"
+    # Eenvoudiger: gebruik date_id als context
+    # Zoek in DOCUMENT_ID_MAPPING op basis van agenda_id
+    for key, doc_id in DOCUMENT_ID_MAPPING.items():
+        if agenda_id in key or key.endswith(agenda_id):
+            direct_url = f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}"
+            try:
+                req_direct = urllib.request.Request(
+                    direct_url,
+                    headers={"User-Agent": "Mozilla/5.0", "Accept": "application/pdf,*/*"}
+                )
+                with urllib.request.urlopen(req_direct, timeout=15) as resp_direct:
+                    data = resp_direct.read()
+                    if data[:4] == b'%PDF':
+                        log(f"  Ondertiteling via mapping gevonden!")
+                        return data, direct_url
+            except Exception as e:
+                log(f"  Directe download mislukt: {e}")
+
     try:
         url = f"{IBABS_BASE}/Agenda/Index/{agenda_id}"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -183,49 +203,44 @@ def fetch_officiele_ondertiteling(agenda_id):
         # Probeer eerst ondertiteling-IDs, dan alle andere
         te_proberen = ondertiteling_ids + [d for d in alle_doc_ids if d not in ondertiteling_ids]
 
-        for doc_id in te_proberen[:10]:
-            pdf_url = f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}"
-            try:
-                req2 = urllib.request.Request(pdf_url, headers={"User-Agent": "Mozilla/5.0"})
-                with urllib.request.urlopen(req2, timeout=15) as resp2:
-                    content_type = resp2.headers.get("Content-Type", "")
-                    data = resp2.read()
-                    if data[:4] == b'%PDF':
-                        # Check of het een ondertiteling is door naar sleutelwoorden te zoeken
-                        # in de eerste 2KB (voor niet-gecomprimeerde PDFs)
-                        preview = data[:2000]
-                        is_ondertiteling = (
-                            b'ndertiteling' in preview or
-                            b'erslag' in preview or
-                            b'ranscript' in preview or
-                            b'oorzitter' in preview or  # "Voorzitter" duidt op vergaderverslag
-                            len(ondertiteling_ids) > 0 and doc_id in ondertiteling_ids
-                        )
-                        if is_ondertiteling or doc_id in ondertiteling_ids:
-                            log(f"  Ondertiteling PDF gevonden: {doc_id[:8]}...")
-                            return data, pdf_url
-            except Exception:
-                pass
+        def download_doc(doc_id):
+            """Probeer een document te downloaden via meerdere URL-patronen."""
+            urls = [
+                f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}",
+                f"{IBABS_BASE}/Document/View/{doc_id}",
+            ]
+            for url in urls:
+                try:
+                    req = urllib.request.Request(
+                        url,
+                        headers={"User-Agent": "Mozilla/5.0", "Accept": "application/pdf,*/*"}
+                    )
+                    with urllib.request.urlopen(req, timeout=15) as resp:
+                        data = resp.read()
+                        if data[:4] == b'%PDF':
+                            return data, url
+                except Exception:
+                    pass
+            return None, None
 
-        # Tweede poging: grootste PDF is waarschijnlijk het verslag
+        # Prioriteer ondertiteling-IDs
+        for doc_id in te_proberen[:5]:
+            data, url = download_doc(doc_id)
+            if data:
+                log(f"  PDF gevonden via prioriteit: {doc_id[:8]}...")
+                return data, url
+
+        # Doorzoek alle documenten, grootste PDF is waarschijnlijk verslag
         pdfs = []
-        for doc_id in alle_doc_ids[:15]:
-            pdf_url = f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}"
-            try:
-                req2 = urllib.request.Request(pdf_url, headers={"User-Agent": "Mozilla/5.0"})
-                with urllib.request.urlopen(req2, timeout=15) as resp2:
-                    data = resp2.read()
-                    if data[:4] == b'%PDF':
-                        pdfs.append((len(data), data, pdf_url))
-            except Exception:
-                pass
+        for doc_id in alle_doc_ids[:20]:
+            data, url = download_doc(doc_id)
+            if data:
+                pdfs.append((len(data), data, url))
 
         if pdfs:
-            # Sorteer op grootte - grootste PDF is waarschijnlijk het verslag
             pdfs.sort(reverse=True)
-            # Alleen als groter dan 50KB (klein = samenvatting/bijlage)
             if pdfs[0][0] > 50000:
-                log(f"  Grootste PDF als ondertiteling gebruikt ({pdfs[0][0]//1024}KB)")
+                log(f"  Grootste PDF gebruikt ({pdfs[0][0]//1024}KB)")
                 return pdfs[0][1], pdfs[0][2]
 
         return None, None
