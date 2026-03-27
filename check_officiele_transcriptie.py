@@ -152,6 +152,11 @@ def fetch_officiele_ondertiteling(agenda_id, ibabs_base):
     """
     Haal de officiële ondertiteling PDF op van bestuurlijkeinformatie.nl.
     Geeft (pdf_bytes, url) of (None, None) als niet beschikbaar.
+
+    Strategie: zoek alle <a href=...documentId=...>...</a> links op de pagina
+    en kijk welke de link-tekst 'ondertiteling' bevat. Dit is robuuster dan
+    zoeken naar 'ondertiteling' in de buurt van 'documentId' in de ruwe HTML,
+    omdat de afstand kan variëren en iBabs soms data-attributen gebruikt.
     """
     try:
         url = f"{ibabs_base}/Agenda/Index/{agenda_id}"
@@ -159,12 +164,42 @@ def fetch_officiele_ondertiteling(agenda_id, ibabs_base):
         with urllib.request.urlopen(req, timeout=15) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
 
+        # Zoek alle ankertags met een documentId in de href
+        # Patroon: <a ...href="...documentId=UUID..."...>LABEL</a>
         ondertiteling_ids = []
-        for m in re.finditer(r'[Oo]ndertiteling.{0,200}?documentId=([a-f0-9-]{36})', html, re.DOTALL):
-            ondertiteling_ids.append(m.group(1))
-        for m in re.finditer(r'documentId=([a-f0-9-]{36}).{0,200}?[Oo]ndertiteling', html, re.DOTALL):
-            if m.group(1) not in ondertiteling_ids:
-                ondertiteling_ids.append(m.group(1))
+
+        # Patroon 1: href bevat documentId als query-parameter
+        for m in re.finditer(
+            r'<a\b[^>]*href=["\'][^"\']*documentId=([a-f0-9-]{36})[^"\']*["\'][^>]*>(.*?)</a>',
+            html, re.DOTALL | re.IGNORECASE
+        ):
+            doc_id = m.group(1)
+            label = re.sub(r'<[^>]+>', '', m.group(2))  # strip inner HTML tags
+            if 'ondertiteling' in label.lower():
+                if doc_id not in ondertiteling_ids:
+                    ondertiteling_ids.append(doc_id)
+                    log(f"  Ondertiteling-link gevonden (label): '{label.strip()[:60]}'")
+
+        # Patroon 2: data-document-id attribuut + tekst in de buurt
+        for m in re.finditer(
+            r'data-document-id=["\']([a-f0-9-]{36})["\'][^>]*>(.*?)</[a-z]+>',
+            html, re.DOTALL | re.IGNORECASE
+        ):
+            doc_id = m.group(1)
+            label = re.sub(r'<[^>]+>', '', m.group(2))
+            if 'ondertiteling' in label.lower():
+                if doc_id not in ondertiteling_ids:
+                    ondertiteling_ids.append(doc_id)
+                    log(f"  Ondertiteling-link gevonden (data-attr): '{label.strip()[:60]}'")
+
+        # Fallback: ruwe nabijheid-zoekopdracht (oorspronkelijke aanpak, verruimd naar 400 tekens)
+        if not ondertiteling_ids:
+            for m in re.finditer(r'[Oo]ndertiteling.{0,400}?documentId=([a-f0-9-]{36})', html, re.DOTALL):
+                if m.group(1) not in ondertiteling_ids:
+                    ondertiteling_ids.append(m.group(1))
+            for m in re.finditer(r'documentId=([a-f0-9-]{36}).{0,400}?[Oo]ndertiteling', html, re.DOTALL):
+                if m.group(1) not in ondertiteling_ids:
+                    ondertiteling_ids.append(m.group(1))
 
         if not ondertiteling_ids:
             return None, None
