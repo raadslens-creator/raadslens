@@ -205,7 +205,9 @@ def fetch_officiele_ondertiteling(agenda_id, ibabs_base):
             return None, None
 
         for doc_id in ondertiteling_ids[:2]:
-            pdf_url = f"{ibabs_base}/Agenda/Document/{agenda_id}?documentId={doc_id}"
+            # iBabs laadt PDFs via /Document/LoadAgendaDocument/{doc_id}?agendaId={agenda_id}
+            # De /Agenda/Document/{agenda_id}?documentId={doc_id} URL geeft een HTML-viewer terug
+            pdf_url = f"{ibabs_base}/Document/LoadAgendaDocument/{doc_id}?agendaId={agenda_id}"
             try:
                 req2 = urllib.request.Request(pdf_url, headers={"User-Agent": "Mozilla/5.0"})
                 with urllib.request.urlopen(req2, timeout=15) as resp2:
