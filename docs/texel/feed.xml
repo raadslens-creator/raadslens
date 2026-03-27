@@ -7,9 +7,9 @@
   <language>nl</language>
   <itunes:author>Raadslens</itunes:author>
   <itunes:summary>Lokale democratie in je oren. Raadslens zet elke vergadering van de Texelse gemeenteraad automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt. Onderweg, tijdens het sporten, of gewoon thuis. Blijf op de hoogte van wat er speelt in jouw gemeente, zonder drie uur voor een scherm te zitten.</itunes:summary>
-  <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
+  <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   <image>
-    <url>https://raadslens-creator.github.io/texel-raad-podcast/logo.png</url>
+    <url>https://raadslens-creator.github.io/raadslens/logo-texel.png</url>
     <title>Raadslens Texel</title>
     <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
   </image>
@@ -36,7 +36,7 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
     <enclosure url="https://github.com/raadslens-creator/raadslens/releases/download/vergadering-20260323_1/20260323_1.mp3" type="audio/mpeg" length="13631488"/>
     <guid isPermaLink="false">texel-20260323_1</guid>
     <itunes:duration></itunes:duration>
-    <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   </item>
   <item>
     <title>Raadsvergadering 18-02-2026</title>
@@ -90,7 +90,7 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
     <enclosure url="https://github.com/raadslens-creator/texel-raad-podcast/releases/download/vergadering-20260218_1/20260218_1.mp3" type="audio/mpeg" length="36624993"/>
     <guid isPermaLink="false">20260218_1</guid>
     <itunes:duration>1:06:50</itunes:duration>
-    <itunes:image href="https://raadslens-creator.github.io/texel-raad-podcast/logo.png"/>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   </item>
 </channel>
 </rss>
