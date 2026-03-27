@@ -228,23 +228,51 @@ def parse_officiele_transcriptie(pdf_bytes, gemeente_naam, date_str, agenda_topi
     Parseer de officiële ondertiteling PDF naar een gestructureerde transcriptie.
     """
     try:
-        subprocess.run(["pip", "install", "pdfminer.six", "-q"],
-                       capture_output=True, check=False)
-
+        # Schrijf PDF naar tijdelijk bestand
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
             f.write(pdf_bytes)
             tmp_path = f.name
 
-        result = subprocess.run(
-            ["python3", "-m", "pdfminer.high_level", tmp_path],
-            capture_output=True, text=True, timeout=60
-        )
+        tekst = None
+
+        # Methode 1: pypdf (snel, geen subprocess)
+        try:
+            subprocess.run(["pip", "install", "pypdf", "-q"],
+                           capture_output=True, check=False)
+            import importlib
+            pypdf = importlib.import_module("pypdf")
+            reader = pypdf.PdfReader(tmp_path)
+            paginas = []
+            for page in reader.pages:
+                paginas.append(page.extract_text() or "")
+            tekst = "\n".join(paginas).strip()
+            if tekst:
+                log(f"  PDF geparsed via pypdf ({len(reader.pages)} pagina's, {len(tekst)} tekens)")
+        except Exception as e:
+            log(f"  pypdf mislukt: {e}")
+
+        # Methode 2: pdfminer als fallback
+        if not tekst:
+            try:
+                subprocess.run(["pip", "install", "pdfminer.six", "-q"],
+                               capture_output=True, check=False)
+                result = subprocess.run(
+                    ["python3", "-m", "pdfminer.high_level", tmp_path],
+                    capture_output=True, text=True, timeout=60
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    tekst = result.stdout.strip()
+                    log(f"  PDF geparsed via pdfminer ({len(tekst)} tekens)")
+                else:
+                    log(f"  pdfminer mislukt: returncode={result.returncode}, stderr={result.stderr[:200]}")
+            except Exception as e:
+                log(f"  pdfminer mislukt: {e}")
+
         Path(tmp_path).unlink(missing_ok=True)
 
-        if result.returncode != 0 or not result.stdout.strip():
+        if not tekst:
+            log(f"  PDF bevat geen extraheerbare tekst")
             return None
-
-        tekst = result.stdout.strip()
 
         lines = []
         lines.append(f"RAADSVERGADERING {gemeente_naam.upper()}")
