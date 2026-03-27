@@ -7,7 +7,6 @@ Zo ja, vervangt de tijdelijke transcriptie met de officiële versie.
 """
 
 import json
-import os
 import re
 import subprocess
 import sys
@@ -17,25 +16,8 @@ import urllib.error
 from datetime import datetime
 from pathlib import Path
 
-import sys
-
-def laad_gemeente_config(gemeente_id):
-    config_file = Path("gemeenten.json")
-    if config_file.exists():
-        config = json.loads(config_file.read_text())
-        for g in config["gemeenten"]:
-            if g["id"] == gemeente_id:
-                return g
-    return {
-        "id": gemeente_id,
-        "ibabs_base": "https://texel.bestuurlijkeinformatie.nl",
-        "transcripties_dir": "docs/transcripties",
-    }
-
-GEMEENTE_ID = os.environ.get("GEMEENTE_ID", "texel") if "os" in dir() else "texel"
-GEMEENTE = laad_gemeente_config(GEMEENTE_ID)
-IBABS_BASE = GEMEENTE["ibabs_base"]
-TRANSCRIPTIES_DIR = Path(GEMEENTE.get("transcripties_dir", "docs/transcripties"))
+IBABS_BASE = "https://texel.bestuurlijkeinformatie.nl"
+TRANSCRIPTIES_DIR = Path("docs/transcripties")
 MAANDEN = {
     1: "januari", 2: "februari", 3: "maart", 4: "april",
     5: "mei", 6: "juni", 7: "juli", 8: "augustus",
@@ -152,97 +134,36 @@ def _zoek_ibabs_id_automatisch(date_id):
 def fetch_officiele_ondertiteling(agenda_id):
     """
     Haal de officiële ondertiteling PDF op van bestuurlijkeinformatie.nl.
-    Probeert meerdere methodes:
-    1. HTML scrapen op documentId links
-    2. Alle documentIds op de pagina proberen (PDF check op inhoud)
     Geeft (pdf_bytes, url) of (None, None) als niet beschikbaar.
     """
-    # Controleer bekende document-ID mapping voor directe download
-    doc_key = f"{GEMEENTE_ID}_{agenda_id.replace(IBABS_BASE, '')}"
-    # Eenvoudiger: gebruik date_id als context
-    # Zoek in DOCUMENT_ID_MAPPING op basis van agenda_id
-    for key, doc_id in DOCUMENT_ID_MAPPING.items():
-        if agenda_id in key or key.endswith(agenda_id):
-            direct_url = f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}"
-            try:
-                req_direct = urllib.request.Request(
-                    direct_url,
-                    headers={"User-Agent": "Mozilla/5.0", "Accept": "application/pdf,*/*"}
-                )
-                with urllib.request.urlopen(req_direct, timeout=15) as resp_direct:
-                    data = resp_direct.read()
-                    if data[:4] == b'%PDF':
-                        log(f"  Ondertiteling via mapping gevonden!")
-                        return data, direct_url
-            except Exception as e:
-                log(f"  Directe download mislukt: {e}")
-
     try:
         url = f"{IBABS_BASE}/Agenda/Index/{agenda_id}"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=15) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
 
-        # Verzamel alle documentIds op de pagina
-        alle_doc_ids = list(dict.fromkeys(re.findall(r'documentId=([a-f0-9-]{36})', html)))
-
-        if not alle_doc_ids:
-            return None, None
-
-        log(f"  {len(alle_doc_ids)} document-IDs gevonden op pagina")
-
-        # Prioriteer ondertiteling-links
+        # Zoek ondertiteling-links
         ondertiteling_ids = []
-        for m in re.finditer(r'[Oo]ndertiteling.{0,300}?documentId=([a-f0-9-]{36})', html, re.DOTALL):
-            if m.group(1) not in ondertiteling_ids:
-                ondertiteling_ids.append(m.group(1))
-        for m in re.finditer(r'documentId=([a-f0-9-]{36}).{0,300}?[Oo]ndertiteling', html, re.DOTALL):
+        for m in re.finditer(r'[Oo]ndertiteling.{0,200}?documentId=([a-f0-9-]{36})', html, re.DOTALL):
+            ondertiteling_ids.append(m.group(1))
+        for m in re.finditer(r'documentId=([a-f0-9-]{36}).{0,200}?[Oo]ndertiteling', html, re.DOTALL):
             if m.group(1) not in ondertiteling_ids:
                 ondertiteling_ids.append(m.group(1))
 
-        # Probeer eerst ondertiteling-IDs, dan alle andere
-        te_proberen = ondertiteling_ids + [d for d in alle_doc_ids if d not in ondertiteling_ids]
-
-        def download_doc(doc_id):
-            """Probeer een document te downloaden via meerdere URL-patronen."""
-            urls = [
-                f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}",
-                f"{IBABS_BASE}/Document/View/{doc_id}",
-            ]
-            for url in urls:
-                try:
-                    req = urllib.request.Request(
-                        url,
-                        headers={"User-Agent": "Mozilla/5.0", "Accept": "application/pdf,*/*"}
-                    )
-                    with urllib.request.urlopen(req, timeout=15) as resp:
-                        data = resp.read()
-                        if data[:4] == b'%PDF':
-                            return data, url
-                except Exception:
-                    pass
+        if not ondertiteling_ids:
             return None, None
 
-        # Prioriteer ondertiteling-IDs
-        for doc_id in te_proberen[:5]:
-            data, url = download_doc(doc_id)
-            if data:
-                log(f"  PDF gevonden via prioriteit: {doc_id[:8]}...")
-                return data, url
-
-        # Doorzoek alle documenten, grootste PDF is waarschijnlijk verslag
-        pdfs = []
-        for doc_id in alle_doc_ids[:20]:
-            data, url = download_doc(doc_id)
-            if data:
-                pdfs.append((len(data), data, url))
-
-        if pdfs:
-            pdfs.sort(reverse=True)
-            if pdfs[0][0] > 50000:
-                log(f"  Grootste PDF gebruikt ({pdfs[0][0]//1024}KB)")
-                return pdfs[0][1], pdfs[0][2]
-
+        for doc_id in ondertiteling_ids[:2]:
+            pdf_url = f"{IBABS_BASE}/Agenda/Document/{agenda_id}?documentId={doc_id}"
+            try:
+                req2 = urllib.request.Request(pdf_url, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req2, timeout=15) as resp2:
+                    content_type = resp2.headers.get("Content-Type", "")
+                    data = resp2.read()
+                    if "pdf" in content_type.lower() or data[:4] == b'%PDF':
+                        return data, pdf_url
+            except Exception:
+                pass
         return None, None
     except Exception as e:
         log(f"Ondertiteling ophalen mislukt: {e}")
