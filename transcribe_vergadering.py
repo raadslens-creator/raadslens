@@ -1283,7 +1283,9 @@ def transcribe_audio(audio_file, vocabulary):
         vad_parameters=dict(
             min_silence_duration_ms=2000,
             speech_pad_ms=400,
-        )
+        ),
+        no_speech_threshold=0.3,
+        condition_on_previous_text=False,
     )
     log(f"Taal gedetecteerd: {info.language} ({info.language_probability:.0%})")
     result = []
