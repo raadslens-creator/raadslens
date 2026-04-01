@@ -459,8 +459,7 @@ def verwerk_gemeente(gemeente, handmatige_ids=None):
 
         raw_audio = download_audio(date_id, data, gemeente["id"])
         if not raw_audio:
-            seen.append(date_id)
-            save_seen(gemeente, seen)
+            log(f"  Audio nog niet beschikbaar - volgende run opnieuw proberen")
             continue
 
         audio_dir = Path(f"audio/{gemeente['id']}")
