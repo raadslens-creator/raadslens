@@ -1046,46 +1046,33 @@ def pas_correcties_toe(tekst):
 # RELEASE / DOWNLOAD FUNCTIES
 # ============================================================
 
-def get_latest_release_with_mp3():
-    TRANSCRIPTIES_DIR.mkdir(parents=True, exist_ok=True)
-    url = f"https://api.github.com/repos/{REPO}/releases?per_page=10"
-    headers = {
-        "Authorization": f"token {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github+json",
-    }
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        releases = json.loads(resp.read())
+def get_r2_mp3_url(date_id):
+    """Bouw de R2 URL op voor een gegeven date_id."""
+    r2_public_url = GEMEENTE.get("r2_public_url", "https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev")
+    return f"{r2_public_url}/{GEMEENTE_ID}/{date_id}.mp3"
 
-    for release in releases:
-        tag = release.get("tag_name", "")
-        match = re.search(r"vergadering-(\d{8}_\d+)", tag)
-        if not match:
-            continue
-        date_id = match.group(1)
+
+def get_latest_release_with_mp3():
+    """Zoek de meest recente vergadering in seen.json zonder transcriptie."""
+    TRANSCRIPTIES_DIR.mkdir(parents=True, exist_ok=True)
+    seen_file = Path(GEMEENTE.get("seen_file", f"docs/{GEMEENTE_ID}/seen.json"))
+    if not seen_file.exists():
+        return None, None
+    seen = json.loads(seen_file.read_text())
+    # Nieuwste eerst
+    for date_id in reversed(seen):
         transcript_file = TRANSCRIPTIES_DIR / f"{date_id}.txt"
         if transcript_file.exists():
             continue
-        for asset in release.get("assets", []):
-            if asset["name"].endswith(".mp3"):
-                return date_id, asset["browser_download_url"]
+        mp3_url = get_r2_mp3_url(date_id)
+        log(f"Gevonden zonder transcriptie: {date_id}")
+        return date_id, mp3_url
     return None, None
 
 
 def get_release_mp3_url(date_id):
-    tag = f"{GEMEENTE_ID}-{date_id}" if GEMEENTE_ID != "texel" else f"vergadering-{date_id}"
-    url = f"https://api.github.com/repos/{REPO}/releases/tags/{tag}"
-    headers = {
-        "Authorization": f"token {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github+json",
-    }
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        release = json.loads(resp.read())
-    for asset in release.get("assets", []):
-        if asset["name"].endswith(".mp3"):
-            return asset["browser_download_url"]
-    return None
+    """Geef de R2 URL terug voor een specifieke date_id."""
+    return get_r2_mp3_url(date_id)
 
 
 def download_mp3(url, date_id):
