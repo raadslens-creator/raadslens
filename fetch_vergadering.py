@@ -503,7 +503,16 @@ def verwerk_gemeente(gemeente, handmatige_ids=None):
             secs = int(MP3(processed).info.length)
             duration_str = f"{secs//3600}:{(secs%3600)//60:02d}:{secs%60:02d}"
         except Exception:
+            secs = 0
             duration_str = ""
+
+        # Minimale duur: vergaderingen korter dan 15 minuten overslaan
+        min_duur = gemeente.get("min_duur_sec", 15 * 60)
+        if secs > 0 and secs < min_duur:
+            log(f"  Vergadering te kort ({secs//60} min) - overgeslagen")
+            seen.append(date_id)
+            save_seen(gemeente, seen)
+            continue
 
         audio_url = upload_to_r2(date_id, processed, gemeente)
         if not audio_url:
