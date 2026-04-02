@@ -1268,6 +1268,27 @@ def find_speaker_at(timestamp, speakers):
 # TRANSCRIPTIE
 # ============================================================
 
+def detect_speech_start(audio_file):
+    """Detecteer wanneer de eerste spraak begint via ffmpeg silencedetect."""
+    try:
+        import subprocess as sp
+        result = sp.run([
+            "ffmpeg", "-i", audio_file,
+            "-af", "silencedetect=noise=-40dB:d=0.5",
+            "-f", "null", "-"
+        ], capture_output=True, text=True)
+        # Zoek eerste silence_end - dat is wanneer de eerste spraak begint
+        ends = re.findall(r"silence_end: ([\d.]+)", result.stderr)
+        if ends:
+            first_speech = float(ends[0])
+            log(f"Eerste spraak gedetecteerd op: {first_speech:.1f}s")
+            return max(0.0, first_speech - 0.5)  # 0.5s buffer
+        return 0.0
+    except Exception as e:
+        log(f"Spraakstart detectie mislukt: {e}")
+        return 0.0
+
+
 def transcribe_audio(audio_file, vocabulary):
     log("Transcriptie starten met faster-whisper...")
     log("Model laden...")
@@ -1471,24 +1492,22 @@ def main():
     # MP3 downloaden
     audio_file = download_mp3(mp3_url, date_id)
 
-    # Voeg stille padding toe aan het begin zodat Whisper de allereerste woorden niet mist
-    padded_file = audio_file.replace(".mp3", "_padded.mp3")
+    # Detecteer spraakstart en knip intro-stilte weg voor transcriptie
     import subprocess as sp
-    pad_cmd = [
-        "ffmpeg", "-y",
-        "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
-        "-i", audio_file,
-        "-filter_complex", "[0:a]atrim=duration=10[silence];[silence][1:a]concat=n=2:v=0:a=1[out]",
-        "-map", "[out]",
-        "-codec:a", "libmp3lame", "-q:a", "4",
-        padded_file
-    ]
-    result = sp.run(pad_cmd, capture_output=True, text=True)
-    if result.returncode == 0:
-        audio_file = padded_file
-        log("10 seconden padding toegevoegd aan begin van MP3")
-    else:
-        log("Padding mislukt - origineel gebruiken")
+    speech_start = detect_speech_start(audio_file)
+    if speech_start > 1.0:
+        trimmed_for_transcription = audio_file.replace(".mp3", "_trimmed_transcription.mp3")
+        trim_cmd = [
+            "ffmpeg", "-y", "-i", audio_file,
+            "-ss", str(max(0, speech_start - 0.5)),
+            "-acodec", "copy", trimmed_for_transcription
+        ]
+        result = sp.run(trim_cmd, capture_output=True, text=True)
+        if result.returncode == 0:
+            audio_file = trimmed_for_transcription
+            log(f"Intro weggeknipt tot {speech_start:.1f}s voor transcriptie")
+        else:
+            log("Intro-knip mislukt - origineel gebruiken")
 
     # Stiltes detecteren
     log("Stiltes detecteren voor timing-correctie...")
