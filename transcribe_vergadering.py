@@ -1297,36 +1297,56 @@ def transcribe_audio(audio_file, vocabulary):
     log("Transcriberen...")
     import subprocess as sp
 
-    # Two-pass aanpak: eerste 30s apart transcriberen zodat Whisper niets overslaat
-    first_chunk = audio_file.replace(".mp3", "_first30.mp3")
-    rest_chunk = audio_file.replace(".mp3", "_rest.mp3")
-    sp.run(["ffmpeg", "-y", "-i", audio_file, "-t", "30", "-acodec", "copy", first_chunk],
-           capture_output=True)
-    sp.run(["ffmpeg", "-y", "-i", audio_file, "-ss", "30", "-acodec", "copy", rest_chunk],
-           capture_output=True)
-
+    # Splits audio in chunks van 30s en transcribeer elk chunk apart
+    # zodat Whisper geen enkel stuk kan overslaan
+    import math
+    
+    # Bepaal totale duur
+    probe = sp.run(
+        ["ffprobe", "-i", audio_file, "-show_entries", "format=duration",
+         "-v", "quiet", "-of", "csv=p=0"],
+        capture_output=True, text=True
+    )
+    total_dur = float(probe.stdout.strip()) if probe.stdout.strip() else 7200
+    chunk_size = 30
+    
     result = []
-
-    # Eerste 30 seconden
-    if Path(first_chunk).exists():
-        segs1, info = model.transcribe(
-            first_chunk, language="nl", beam_size=3, initial_prompt=vocabulary,
-            vad_filter=False, no_speech_threshold=0.1, condition_on_previous_text=False,
+    first_info = None
+    
+    for chunk_start in range(0, int(total_dur), chunk_size):
+        chunk_file = audio_file.replace(".mp3", f"_chunk{chunk_start}.mp3")
+        sp.run([
+            "ffmpeg", "-y", "-i", audio_file,
+            "-ss", str(chunk_start), "-t", str(chunk_size),
+            "-acodec", "copy", chunk_file
+        ], capture_output=True)
+        
+        if not Path(chunk_file).exists():
+            continue
+            
+        threshold = 0.1 if chunk_start < 120 else 0.6
+        segs, info = model.transcribe(
+            chunk_file, language="nl", beam_size=3,
+            initial_prompt=vocabulary,
+            vad_filter=False,
+            no_speech_threshold=threshold,
+            condition_on_previous_text=False,
         )
-        log(f"Taal gedetecteerd: {info.language} ({info.language_probability:.0%})")
-        for seg in segs1:
-            if seg.text.strip() and seg.no_speech_prob < 0.8:
-                result.append({"start": seg.start, "end": seg.end, "text": seg.text.strip()})
-
-    # Rest van de audio
-    if Path(rest_chunk).exists():
-        segs2, _ = model.transcribe(
-            rest_chunk, language="nl", beam_size=3, initial_prompt=vocabulary,
-            vad_filter=False, no_speech_threshold=0.3, condition_on_previous_text=False,
-        )
-        for seg in segs2:
-            result.append({"start": seg.start + 30, "end": seg.end + 30, "text": seg.text.strip()})
-
+        if first_info is None:
+            first_info = info
+            
+        for seg in segs:
+            if seg.text.strip():
+                result.append({
+                    "start": seg.start + chunk_start,
+                    "end": seg.end + chunk_start,
+                    "text": seg.text.strip(),
+                })
+        
+        Path(chunk_file).unlink(missing_ok=True)
+    
+    if first_info:
+        log(f"Taal gedetecteerd: {first_info.language} ({first_info.language_probability:.0%})")
     log(f"{len(result)} segmenten getranscribeerd")
     return result
 
