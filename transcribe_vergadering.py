@@ -1307,6 +1307,7 @@ def transcribe_audio(audio_file, vocabulary):
         ),
         no_speech_threshold=0.3,
         condition_on_previous_text=False,
+        clip_timestamps="0",
     )
     log(f"Taal gedetecteerd: {info.language} ({info.language_probability:.0%})")
     result = []
@@ -1492,22 +1493,8 @@ def main():
     # MP3 downloaden
     audio_file = download_mp3(mp3_url, date_id)
 
-    # Detecteer spraakstart en knip intro-stilte weg voor transcriptie
+    # Geen intro-knip - Whisper begint geforceerd bij 0:00 via clip_timestamps
     import subprocess as sp
-    speech_start = detect_speech_start(audio_file)
-    if speech_start > 1.0:
-        trimmed_for_transcription = audio_file.replace(".mp3", "_trimmed_transcription.mp3")
-        trim_cmd = [
-            "ffmpeg", "-y", "-i", audio_file,
-            "-ss", str(max(0, speech_start - 0.5)),
-            "-acodec", "copy", trimmed_for_transcription
-        ]
-        result = sp.run(trim_cmd, capture_output=True, text=True)
-        if result.returncode == 0:
-            audio_file = trimmed_for_transcription
-            log(f"Intro weggeknipt tot {speech_start:.1f}s voor transcriptie")
-        else:
-            log("Intro-knip mislukt - origineel gebruiken")
 
     # Stiltes detecteren
     log("Stiltes detecteren voor timing-correctie...")
