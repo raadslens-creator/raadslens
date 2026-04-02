@@ -9,7 +9,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 GITHUB_TOKEN = os.environ.get("GH_TOKEN", "")
-SILENCE_THRESHOLD_DB = "-35dB"
+SILENCE_THRESHOLD_DB = "-60dB"
 SILENCE_MIN_DURATION = 90
 
 MAANDEN = {
