@@ -1274,7 +1274,7 @@ def detect_speech_start(audio_file):
         import subprocess as sp
         result = sp.run([
             "ffmpeg", "-i", audio_file,
-            "-af", "silencedetect=noise=-30dB:d=1.0",
+            "-af", "silencedetect=noise=-50dB:d=0.5",
             "-f", "null", "-"
         ], capture_output=True, text=True)
         # Zoek eerste silence_end - dat is wanneer de eerste spraak begint
