@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+<channel>
+  <title>Raadslens Rotterdam</title>
+  <description>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Rotterdam automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt.</description>
+  <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
+  <language>nl</language>
+  <managingEditor>raadslens@gmail.com (Raadslens)</managingEditor>
+  <webMaster>raadslens@gmail.com (Raadslens)</webMaster>
+  <itunes:author>Raadslens</itunes:author>
+  <itunes:owner>
+    <itunes:name>Raadslens</itunes:name>
+    <itunes:email>raadslens@gmail.com</itunes:email>
+  </itunes:owner>
+  <itunes:summary>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Rotterdam automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt.</itunes:summary>
+  <itunes:image href="https://raadslens-creator.github.io/raadslens/rotterdam/logo-rotterdam.png"/>
+  <image>
+    <url>https://raadslens-creator.github.io/raadslens/rotterdam/logo-rotterdam.png</url>
+    <title>Raadslens Rotterdam</title>
+    <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
+  </image>
+  <itunes:category text="Government"/>
+  <itunes:explicit>false</itunes:explicit>
+</channel>
+</rss>
