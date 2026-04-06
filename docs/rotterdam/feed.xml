@@ -3,7 +3,7 @@
 <channel>
   <title>Raadslens Rotterdam</title>
   <description>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Rotterdam automatisch om naar een podcast.</description>
-  <link>https://rotterdam.bestuurlijkeinformatie.nl/Calendar</link>
+  <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
   <language>nl</language>
   <managingEditor>raadslens@gmail.com (Raadslens)</managingEditor>
   <webMaster>raadslens@gmail.com (Raadslens)</webMaster>
@@ -17,13 +17,13 @@
   <image>
     <url>https://raadslens-creator.github.io/raadslens/logo-rotterdam.png</url>
     <title>Raadslens Rotterdam</title>
-    <link>https://rotterdam.bestuurlijkeinformatie.nl/Calendar</link>
+    <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
   </image>
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
     <title>Gemeenteraad 30-03-2026</title>
-    <link>https://rotterdam.bestuurlijkeinformatie.nl/Calendar</link>
+    <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
     <description><![CDATA[Vergadering gemeente Rotterdam - 30 maart 2026
 
 Agenda:
@@ -64,7 +64,7 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
   </item>
   <item>
     <title>Gemeenteraad 01-04-2026</title>
-    <link>https://rotterdam.bestuurlijkeinformatie.nl/Calendar</link>
+    <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
     <description><![CDATA[Vergadering gemeente Rotterdam - 1 april 2026
 
 Agenda:
