@@ -3,7 +3,7 @@
 <channel>
   <title>Raadslens Rotterdam</title>
   <description>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Rotterdam automatisch om naar een podcast.</description>
-  <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
+  <link>https://gemeenteraad.rotterdam.nl</link>
   <language>nl</language>
   <managingEditor>raadslens@gmail.com (Raadslens)</managingEditor>
   <webMaster>raadslens@gmail.com (Raadslens)</webMaster>
@@ -17,10 +17,47 @@
   <image>
     <url>https://raadslens-creator.github.io/raadslens/logo-rotterdam.png</url>
     <title>Raadslens Rotterdam</title>
-    <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>
+    <link>https://gemeenteraad.rotterdam.nl</link>
   </image>
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
+  <item>
+    <title>Gemeenteraad 08-04-2026</title>
+    <link>https://gemeenteraad.rotterdam.nl</link>
+    <description><![CDATA[Vergadering gemeente Rotterdam - 8 april 2026
+
+Agenda:
+• 1 Opening en mededelingen
+• 2 Vaststelling van de agenda voor de raadsvergadering van 8 april 2026.
+• 3 Het voorstel tot benoeming van een voorzitter voor de commissie Zorg & Cultuur.
+• 4 Het voorstel tot naamswijziging fractie GroenLinks-PvdA.
+• 5 Toelichting door de verkenner op het proces en gelegenheid tot het stellen van vragen aan de verkenner.
+• 6 Debat over de duiding van de uitslag van de verkiezingen van 18 maart 2026 en het advies van de verkenner.
+• 7 Sluiting
+
+Hoofdstukken:
+• 04:36 1 Opening en mededelingen
+• 05:00 2 Vaststelling van de agenda voor de raadsvergadering van 8 april 2026.
+• 07:09 3 Het voorstel tot benoeming van een voorzitter voor de commissie Zorg & Cultuur
+• 07:44 4 Het voorstel tot naamswijziging fractie GroenLinks-PvdA.
+• 08:42 5 Toelichting door de verkenner op het proces en gelegenheid tot het stellen van
+• 46:14 6 Debat over de duiding van de uitslag van de verkiezingen van 18 maart 2026 en 
+• 2:23:52 7 Sluiting
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://gemeenteraad.rotterdam.nl.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Wed, 08 Apr 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260408_1.mp3" type="audio/mpeg" length="81678458"/>
+    <guid isPermaLink="false">rotterdam-20260408_1</guid>
+    <itunes:duration>2:25:09</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
+  </item>
   <item>
     <title>Gemeenteraad 30-03-2026</title>
     <link>https://rotterdamraad.bestuurlijkeinformatie.nl/Calendar</link>

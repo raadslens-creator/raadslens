@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 <channel>
   <title>Raadslens Texel</title>
-  <description>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Texel automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt.</description>
+  <description>Lokale democratie in je oren. Raadslens zet elke vergadering van de Texelse gemeenteraad automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt. Onderweg, tijdens het sporten, of gewoon thuis. Blijf op de hoogte van wat er speelt in jouw gemeente, zonder drie uur voor een scherm te zitten.</description>
   <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
   <language>nl</language>
   <managingEditor>raadslens@gmail.com (Raadslens)</managingEditor>
@@ -12,7 +12,7 @@
     <itunes:name>Raadslens</itunes:name>
     <itunes:email>raadslens@gmail.com</itunes:email>
   </itunes:owner>
-  <itunes:summary>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Texel automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt.</itunes:summary>
+  <itunes:summary>Lokale democratie in je oren. Raadslens zet elke vergadering van de Texelse gemeenteraad automatisch om naar een podcast - zodat je kunt luisteren wanneer het jou uitkomt. Onderweg, tijdens het sporten, of gewoon thuis. Blijf op de hoogte van wat er speelt in jouw gemeente, zonder drie uur voor een scherm te zitten.</itunes:summary>
   <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   <image>
     <url>https://raadslens-creator.github.io/raadslens/logo-texel.png</url>
@@ -21,6 +21,61 @@
   </image>
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
+  <item>
+    <title>Raadscommissie 08-04-2026</title>
+    <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
+    <description><![CDATA[Vergadering gemeente Texel - 8 april 2026
+
+Agenda:
+• 1 Opening en mededelingen
+• 2 Vaststelling agenda
+• 3 Rekenkamerrapport: Over de financiële positie van de gemeenten en sturing door de raad
+• 4 Ruimte voor Publiek (Mogelijkheid om de leden van de raadscommissie over een onderwerp te vertellen of een vraag te stellen)
+• 5 Rondvraag Commissieleden
+• 6 Op verzoek van GroenLinks: Bespreken brief over het natuurtoilet
+• 7 Meerjarenprogramma strand en duingebied Noordzeekust Texel 2026-2030
+• 7.a Op verzoek van GroenLinks: Brief Vogelwerkgroep Texel
+• 8 Perspectiefbrief 2027
+• 9 Geen bindend advies voor aanvragen binnen ‘Beleidsregels windwokkels gemeente Texel 2026’
+• 10 Op verzoek mevrouw Visser-Veltkamp: raad bijpraten over uitvoering motie Extern onderzoek gemotiveerde afwijking CROW-richtlijnen
+• 11 Op verzoek mevrouw Visser-Veltkamp: N.a.v. antwoord op toezegging parkeergeld sporthal
+• 12 Aankondiging motie D66: Elk Texels kind moet leren hoe veilig in zee te zwemmen
+• 13 Behandeladviezen 'brieven aan de raad'
+• 14 Mondelinge beantwoording Rondvragen Commissie (voor zover niet reeds beantwoord)
+• 15 Sluiting
+
+Hoofdstukken:
+• 03:25 1 Opening en mededelingen
+• 06:52 2 Vaststelling agenda
+• 07:02 3 Rekenkamerrapport: Over de financiële positie van de gemeenten en sturing door
+• 39:52 4 Ruimte voor Publiek (Mogelijkheid om de leden van de raadscommissie over een o
+• 42:08 5 Rondvraag Commissieleden
+• 44:29 6 Op verzoek van GroenLinks: Bespreken brief over het natuurtoilet
+• 57:45 7 Meerjarenprogramma strand en duingebied Noordzeekust Texel 2026-2030
+• 58:45 7.a Op verzoek van GroenLinks: Brief Vogelwerkgroep Texel
+• 1:21:19 8 Perspectiefbrief 2027
+• 1:41:31 9 Geen bindend advies voor aanvragen binnen ‘Beleidsregels windwokkels gemeente 
+• 1:57:42 10 Op verzoek mevrouw Visser-Veltkamp: raad bijpraten over uitvoering motie Exte
+• 2:04:31 11 Op verzoek mevrouw Visser-Veltkamp: N.a.v. antwoord op toezegging parkeergeld
+• 2:11:59 12 Aankondiging motie D66: Elk Texels kind moet leren hoe veilig in zee te zwemm
+• 2:12:41 13 Behandeladviezen 'brieven aan de raad'
+• 2:13:12 14 Mondelinge beantwoording Rondvragen Commissie (voor zover niet reeds beantwoo
+• 2:13:16 15 Sluiting
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://texel.bestuurlijkeinformatie.nl/Calendar.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Wed, 08 Apr 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/texel/20260408_1.mp3" type="audio/mpeg" length="72707366"/>
+    <guid isPermaLink="false">texel-20260408_1</guid>
+    <itunes:duration>2:13:37</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
+  </item>
   <item>
     <title>Raadsvergadering 01-04-2026</title>
     <link>https://texel.bestuurlijkeinformatie.nl/Calendar</link>
@@ -54,7 +109,7 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
     <itunes:duration>0:23:59</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   </item>
-    <item>
+  <item>
     <title>Raadsvergadering 31-03-2026</title>
     <link>https://texel.bestuurlijkeinformatie.nl/Agenda/Index/c15f1ab0-f3b1-4d9c-ae6e-07ab8b1ce32b</link>
     <description><![CDATA[Vergadering gemeente Texel - 31 maart 2026
@@ -85,7 +140,7 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
     <itunes:duration>1:09:17</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   </item>
-    <item>
+  <item>
     <title>Raadsvergadering 23-03-2026</title>
     <link>https://texel.bestuurlijkeinformatie.nl/Agenda/Index/4a8be1a5-97dd-4d90-b90c-7aa780c893f3</link>
     <description><![CDATA[Vergadering gemeente Texel - 23 maart 2026
@@ -120,6 +175,5 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
     <itunes:duration>0:29:15</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-texel.png"/>
   </item>
-
 </channel>
 </rss>
