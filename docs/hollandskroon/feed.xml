@@ -22,6 +22,79 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
+    <title>Raad 16-04-2026</title>
+    <link>https://hollandskroon.bestuurlijkeinformatie.nl/Calendar</link>
+    <description><![CDATA[Vergadering gemeente Hollands Kroon - 16 april 2026
+
+Agenda:
+• A.1 Opening
+• A.2 Mededelingen voorzitter
+• A.3 Verstrekken van inlichtingen op grond van artikel 7.8 Reglement van Orde
+• A.4 Bespreken verkenningsproces coalitievorming
+• B Oordeelvormend
+• B.1 Vaststellen agenda oordeelvormend gedeelte
+• B.2 Raadsvoorstel tweede wijziging van het Reglement van orde voor de gemeenteraad van Hollands Kroon 2025
+• C Besluitvormend
+• C.1 Agenda besluitvormend gedeelte
+• C.2 Loting volgnummer in verband met hoofdelijke stemming
+• C.3.a Verslag raadsvergadering 31 maart 2026
+• C.3.b Verslag raadsvergadering 01 april 2026
+• C.4 Wijze van afdoening ingekomen stukken
+• C.5 Raadsvoorstel Bindend Advies Heerenweg 12 Barsingerhorn
+• C.6 Raadsvoorstel bindend advies Heerenweg 264 Barsingerhorn
+• C.7 Raadsvoorstel TAM IMRO Terra Incognito Dam 7 Westerland
+• C.8 Raadsvoorstel TAM IMRO  Priggeweg 20 Zijdewind
+• C.9 Raadsvoorstel TAM IMRO Wieringerwaardweg 1 Wieringerwaard
+• C.10 Raadsvoorstel eerste wijziging subsidieverordening isolatieversneller
+• C.11  Raadsvoorstel statutenwijziging Stichting Samenwerkingsverband
+• C.12 Raadsvoorstel Verordening maatschappelijke ondersteuning Hollands Kroon
+• C.13 Raadsvoorstel Benoeming fractieondersteuners
+• C.14 Raadsvoorstel Personele invulling voorzitterschappen en lidmaatschappen commissies
+• C.15 Raadsvoorstel tweede wijziging van het Reglement van orde voor de gemeenteraad van Hollands Kroon 2025 (afhankelijk van oordeelsvormende gedeelte)
+• D Sluiting
+
+Hoofdstukken:
+• 00:00 A.1 Opening
+• 01:00 A.2 Mededelingen voorzitter
+• 02:00 A.3 Verstrekken van inlichtingen op grond van artikel 7.8 Reglement van Orde
+• 03:00 A.4 Bespreken verkenningsproces coalitievorming
+• 04:00 B Oordeelvormend
+• 05:00 B.1 Vaststellen agenda oordeelvormend gedeelte
+• 06:00 B.2 Raadsvoorstel tweede wijziging van het Reglement van orde voor de gemeentera
+• 07:00 C Besluitvormend
+• 08:00 C.1 Agenda besluitvormend gedeelte
+• 09:00 C.2 Loting volgnummer in verband met hoofdelijke stemming
+• 10:00 C.3.a Verslag raadsvergadering 31 maart 2026
+• 11:00 C.3.b Verslag raadsvergadering 01 april 2026
+• 12:00 C.4 Wijze van afdoening ingekomen stukken
+• 13:00 C.5 Raadsvoorstel Bindend Advies Heerenweg 12 Barsingerhorn
+• 14:00 C.6 Raadsvoorstel bindend advies Heerenweg 264 Barsingerhorn
+• 15:00 C.7 Raadsvoorstel TAM IMRO Terra Incognito Dam 7 Westerland
+• 16:00 C.8 Raadsvoorstel TAM IMRO  Priggeweg 20 Zijdewind
+• 17:00 C.9 Raadsvoorstel TAM IMRO Wieringerwaardweg 1 Wieringerwaard
+• 18:00 C.10 Raadsvoorstel eerste wijziging subsidieverordening isolatieversneller
+• 19:00 C.11  Raadsvoorstel statutenwijziging Stichting Samenwerkingsverband
+• 20:00 C.12 Raadsvoorstel Verordening maatschappelijke ondersteuning Hollands Kroon
+• 21:00 C.13 Raadsvoorstel Benoeming fractieondersteuners
+• 22:00 C.14 Raadsvoorstel Personele invulling voorzitterschappen en lidmaatschappen com
+• 23:00 C.15 Raadsvoorstel tweede wijziging van het Reglement van orde voor de gemeenter
+• 24:00 D Sluiting
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://hollandskroon.bestuurlijkeinformatie.nl/Calendar.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Thu, 16 Apr 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/hollandskroon/20260416_1.mp3" type="audio/mpeg" length="81961008"/>
+    <guid isPermaLink="false">hollandskroon-20260416_1</guid>
+    <itunes:duration>2:11:16</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/hollandskroon/logo-hollandskroon.png"/>
+  </item>
+  <item>
     <title>Raad 01-04-2026</title>
     <link>https://hollandskroon.bestuurlijkeinformatie.nl/Calendar</link>
     <description><![CDATA[Vergadering gemeente Hollands Kroon - 1 april 2026
@@ -93,35 +166,6 @@ Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></descrip
     <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/hollandskroon/20260331_1.mp3" type="audio/mpeg" length="68560125"/>
     <guid isPermaLink="false">hollandskroon-20260331_1</guid>
     <itunes:duration>1:37:50</itunes:duration>
-    <itunes:image href="https://raadslens-creator.github.io/raadslens/hollandskroon/logo-hollandskroon.png"/>
-  </item>
-  <item>
-    <title>Raad 01-04-2026</title>
-    <link>https://hollandskroon.bestuurlijkeinformatie.nl/Calendar</link>
-    <description><![CDATA[Vergadering gemeente Hollands Kroon - 1 april 2026
-
-Agenda:
-• A Feestelijke Opening en toespraak door de burgemeester
-• A.1 Afleggen eed of belofte door raadsleden
-• D Sluiting
-
-Hoofdstukken:
-• 00:00 A Feestelijke Opening en toespraak door de burgemeester
-• 01:00 A.1 Afleggen eed of belofte door raadsleden
-• 02:00 D Sluiting
-
----
-Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
-
-De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://hollandskroon.bestuurlijkeinformatie.nl/Calendar.
-
-Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
-
-Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Wed, 01 Apr 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/hollandskroon/20260401_1.mp3" type="audio/mpeg" length="13747592"/>
-    <guid isPermaLink="false">hollandskroon-20260401_1</guid>
-    <itunes:duration>0:28:36</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/hollandskroon/logo-hollandskroon.png"/>
   </item>
 </channel>
