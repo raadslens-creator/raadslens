@@ -464,11 +464,19 @@ def verwerk_gemeente(gemeente, handmatige_ids=None):
 
         # Filter op vergaderingstype (gemeente-specifiek, anders global default)
         vergadering_typen = gemeente.get("vergadering_typen") or GEMEENTEN_CONFIG.get("default_vergadering_typen", [])
+        titel = data.get("title", "")
         if vergadering_typen:
-            titel = data.get("title", "")
             if not any(vtype.lower() in titel.lower() for vtype in vergadering_typen):
                 log(f"  Overgeslagen: '{titel}' niet in vergadering_typen")
                 continue
+
+        # Filter op blokkeerwoorden (bijv. testvergaderingen)
+        blokkeer = GEMEENTEN_CONFIG.get("blokkeer_trefwoorden", [])
+        if any(woord.lower() in titel.lower() for woord in blokkeer):
+            log(f"  Overgeslagen: '{titel}' bevat blokkeerwoord")
+            seen.append(date_id)
+            save_seen(gemeente, seen)
+            continue
 
         # Filter op minimale starttijd (bijv. 18:30 voor avondvergaderingen)
         min_starttijd_uur = gemeente.get("min_starttijd_uur", 0)
