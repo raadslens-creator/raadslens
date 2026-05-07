@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:podcast="https://podcastindex.org/namespace/1.0">
 <channel>
   <title>Raadslens Rotterdam</title>
+  <atom:link href="https://raadslens-creator.github.io/raadslens/rotterdam/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Lokale democratie in je oren. Raadslens zet elke vergadering van de gemeenteraad van Rotterdam automatisch om naar een podcast.</description>
   <link>https://gemeenteraad.rotterdam.nl</link>
   <language>nl</language>
@@ -21,8 +22,9 @@
   </image>
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
+  <podcast:guid>8ccace95-04be-5706-849b-1c7b8ba75eef</podcast:guid>
   <item>
-    <title>Commissie Leefomgeving & Economie 21-04-2026</title>
+    <title>Commissie Leefomgeving &amp; Economie 21-04-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
     <description><![CDATA[Vergadering gemeente Rotterdam - 21 april 2026
 
