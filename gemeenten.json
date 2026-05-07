@@ -120,5 +120,13 @@
     "Duidingsbijeenkomst",
     "Duidingsdebat",
     "gemeenteraad"
+  ],
+  "blokkeer_trefwoorden": [
+    "test",
+    "av-middelen",
+    "soundcheck",
+    "microfoontest",
+    "technische test",
+    "proefopname"
   ]
 }
