@@ -22,6 +22,33 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
+    <title>Commissie Bouwen & Wonen 20-05-2026</title>
+    <link>https://gemeenteraad.rotterdam.nl</link>
+    <description><![CDATA[Vergadering gemeente Rotterdam - 20 mei 2026
+
+Agenda:
+• 1 Inspreeksessie gebiedsontwikkeling Stadionpark
+• 2 Inspreekbijdragen
+
+Hoofdstukken:
+• 09:16 1 Inspreeksessie gebiedsontwikkeling Stadionpark
+• 10:16 2 Inspreekbijdragen
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://gemeenteraad.rotterdam.nl.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Wed, 20 May 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260520_1.mp3" type="audio/mpeg" length="46610369"/>
+    <guid isPermaLink="false">rotterdam-20260520_1</guid>
+    <itunes:duration>1:37:00</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
+  </item>
+  <item>
     <title>Commissie tot Onderzoek van de Rekening 19-05-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
     <description><![CDATA[Vergadering gemeente Rotterdam - 19 mei 2026
