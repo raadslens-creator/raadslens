@@ -22,6 +22,25 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
+    <title>Raadsvergadering Commissie Ruimtelijke Ontwikkeling en Projecten 04-06-2026</title>
+    <link>https://hilversum.bestuurlijkeinformatie.nl/Calendar</link>
+    <description><![CDATA[Vergadering gemeente Hilversum - 4 juni 2026
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://hilversum.bestuurlijkeinformatie.nl/Calendar.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Thu, 04 Jun 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/hilversum/20260604_3.mp3" type="audio/mpeg" length="813"/>
+    <guid isPermaLink="false">hilversum-20260604_3</guid>
+    <itunes:duration>0:00:00</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-hilversum.png"/>
+  </item>
+  <item>
     <title>COMMISSIE Duurzaamheid en Bereikbaarheid 03-06-2026</title>
     <link>https://hilversum.bestuurlijkeinformatie.nl/Calendar</link>
     <description><![CDATA[Vergadering gemeente Hilversum - 3 juni 2026
