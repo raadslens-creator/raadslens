@@ -22,27 +22,15 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Veiligheid, Bestuur & Financiën 04-06-2026</title>
+    <title>Commissie Bouwen & Wonen 10-06-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 4 juni 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 10 juni 2026
 
 Agenda:
-• 2 Overlegvergadering
-• 2.01 Opening en mededelingen
-• 2.02 Vaststellen van de agenda
-• 2.03 Inspreker Vreemd aan de Orde
-• 2.04 Jaarstukken 2025
-• 2.04.01 Betrekken bij Jaarstukken 2025
-• 2.05 Rondvraag en sluiting
+• Inwerksessie Erfpacht
 
 Hoofdstukken:
-• 00:00 2 Overlegvergadering
-• 16:01 2.01 Opening en mededelingen
-• 16:34 2.02 Vaststellen van de agenda
-• 20:01 2.03 Inspreker Vreemd aan de Orde
-• 36:18 2.04 Jaarstukken 2025
-• 37:18 2.04.01 Betrekken bij Jaarstukken 2025
-• 4:46:34 2.05 Rondvraag en sluiting
+• 00:00 Inwerksessie Erfpacht
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -52,10 +40,10 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Thu, 04 Jun 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260604_2.mp3" type="audio/mpeg" length="138054875"/>
-    <guid isPermaLink="false">rotterdam-20260604_2</guid>
-    <itunes:duration>4:47:19</itunes:duration>
+    <pubDate>Wed, 10 Jun 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260610_2.mp3" type="audio/mpeg" length="44332943"/>
+    <guid isPermaLink="false">rotterdam-20260610_2</guid>
+    <itunes:duration>1:09:02</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
