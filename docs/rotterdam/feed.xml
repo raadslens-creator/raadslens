@@ -22,15 +22,25 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Bouwen & Wonen 10-06-2026</title>
+    <title>Subcommissie Bestuur Openbaar Onderwijs (BOOR) 15-06-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 10 juni 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 15 juni 2026
 
 Agenda:
-• Inwerksessie Erfpacht
+• 1 Algemene vergadering
+• 1.01 Opening en mededelingen
+• 1.02 Vaststellen agenda
+• 1.03 Jaarstukken 2025 en 1e Voortgangsrapportage 2026
+• 1.04 Afdoening van toezeggingen
+• 1.05 Rondvraag en sluiting
 
 Hoofdstukken:
-• 00:00 Inwerksessie Erfpacht
+• 00:00 1 Algemene vergadering
+• 07:26 1.01 Opening en mededelingen
+• 11:56 1.02 Vaststellen agenda
+• 11:57 1.03 Jaarstukken 2025 en 1e Voortgangsrapportage 2026
+• 1:35:31 1.04 Afdoening van toezeggingen
+• 1:36:31 1.05 Rondvraag en sluiting
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -40,10 +50,10 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Wed, 10 Jun 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260610_2.mp3" type="audio/mpeg" length="44332943"/>
-    <guid isPermaLink="false">rotterdam-20260610_2</guid>
-    <itunes:duration>1:09:02</itunes:duration>
+    <pubDate>Mon, 15 Jun 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260615_1.mp3" type="audio/mpeg" length="46688066"/>
+    <guid isPermaLink="false">rotterdam-20260615_1</guid>
+    <itunes:duration>1:37:09</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
