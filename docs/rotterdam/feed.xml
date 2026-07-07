@@ -22,65 +22,27 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Veiligheid, Bestuur & Financiën 02-07-2026</title>
+    <title>Gemeenteraad 06-07-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 2 juli 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 6 juli 2026
 
 Agenda:
-• 1 Procedurevergadering
-• 1.01 Opening en mededelingen
-• 1.02 Commissieplanning
-• 1.03 Regelingen van Werkzaamheden
-• 1.04 Initiatiefnotities/voorstellen
-• 1.05 Verkenningen
-• 1.06 Besluitenlijst procedurevergadering
-• 1.07 Ingekomen stukken
-• 1.07.02 Algemeen
-• 1.07.03 Veiligheid
-• 1.07.04 Organisatie
-• 1.07.05 Bestuur
-• 1.07.06 Financiën
-• 1.07.07 Wijken
-• 1.07.08 Vastgoed
-• 1.07.09 Projecten
-• 1.08 Lijsten van openstaande toezeggingen, schriftelijke vragen en moties
-• 1.09 Sluiting
-• 2 Overlegvergadering
-• 2.01 Opening en mededelingen
-• 2.02 Vaststellen van de agenda
-• 2.03 Adviezenlijst openbare overlegvergadering
-• 2.04 OV-verboden
-• 2.05 Beleidsplan ambtelijke integriteit 2026-2030
-• 2.05.01 Betrekken bij Beleidsplan ambtelijke integriteit 2026-2030
-• 2.06 Rondvraag en sluiting
+• 1 Opening en mededelingen.
+• 2.1 Hoorzitting kandidaat-wethouder R.G.C. (René) Segers-Hoogendoorn.
+• 2.2 Hoorzitting kandidaat-wethouder A. (Astrid) Kockelkoren.
+• 2.3 Hoorzitting kandidaat-wethouder S.C.W. (Sabine) Biesheuvel.
+• 2.4 Hoorzitting kandidaat-wethouder E. (Eva) Heijblom.
+• 2.5 Hoorzitting kandidaat-wethouder C.M. (Chantal) Zeegers.
+• 3 Sluiting.
 
 Hoofdstukken:
-• 00:00 1 Procedurevergadering
-• 20:36 1.01 Opening en mededelingen
-• 21:50 1.02 Commissieplanning
-• 22:50 1.03 Regelingen van Werkzaamheden
-• 23:50 1.04 Initiatiefnotities/voorstellen
-• 24:50 1.05 Verkenningen
-• 26:28 1.06 Besluitenlijst procedurevergadering
-• 26:55 1.07 Ingekomen stukken
-• 27:55 1.07.02 Algemeen
-• 28:55 1.07.03 Veiligheid
-• 29:55 1.07.04 Organisatie
-• 30:55 1.07.05 Bestuur
-• 31:55 1.07.06 Financiën
-• 32:55 1.07.07 Wijken
-• 33:55 1.07.08 Vastgoed
-• 34:55 1.07.09 Projecten
-• 45:32 1.08 Lijsten van openstaande toezeggingen, schriftelijke vragen en moties
-• 46:32 1.09 Sluiting
-• 48:33 2 Overlegvergadering
-• 48:39 2.01 Opening en mededelingen
-• 48:40 2.02 Vaststellen van de agenda
-• 49:21 2.03 Adviezenlijst openbare overlegvergadering
-• 49:55 2.04 OV-verboden
-• 1:30:33 2.05 Beleidsplan ambtelijke integriteit 2026-2030
-• 1:31:33 2.05.01 Betrekken bij Beleidsplan ambtelijke integriteit 2026-2030
-• 3:05:45 2.06 Rondvraag en sluiting
+• 04:15 1 Opening en mededelingen.
+• 05:38 2.1 Hoorzitting kandidaat-wethouder R.G.C. (René) Segers-Hoogendoorn.
+• 39:36 2.2 Hoorzitting kandidaat-wethouder A. (Astrid) Kockelkoren.
+• 1:04:25 2.3 Hoorzitting kandidaat-wethouder S.C.W. (Sabine) Biesheuvel.
+• 1:05:25 2.4 Hoorzitting kandidaat-wethouder E. (Eva) Heijblom.
+• 2:22:01 2.5 Hoorzitting kandidaat-wethouder C.M. (Chantal) Zeegers.
+• 2:50:46 3 Sluiting.
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -90,10 +52,10 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Thu, 02 Jul 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260702_3.mp3" type="audio/mpeg" length="89776367"/>
-    <guid isPermaLink="false">rotterdam-20260702_3</guid>
-    <itunes:duration>3:06:50</itunes:duration>
+    <pubDate>Mon, 06 Jul 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260706_1.mp3" type="audio/mpeg" length="113862806"/>
+    <guid isPermaLink="false">rotterdam-20260706_1</guid>
+    <itunes:duration>2:51:32</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
