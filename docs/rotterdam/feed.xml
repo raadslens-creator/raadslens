@@ -22,25 +22,19 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Leefomgeving & Economie 09-09-2026</title>
+    <title>Commissie Leefomgeving & Economie 15-09-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 9 september 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 15 september 2026
 
 Agenda:
 • 1 Opening en mededelingen
-• 2 Technische sessie - Inwerksessie Mobiliteit
-• 3 (verkeers)Overlast Rotterdam Centrum / Meent
-• 3.01 Technische toelichting
-• 3.02 Inspreekmoment (verkeers)Overlast Rotterdam Centrum / Meent
-• 4 Sluiting
+• 2 Technische sessie - MIRT-project Stadsbrug en OV
+• 3 Sluiting
 
 Hoofdstukken:
-• 00:00 1 Opening en mededelingen
-• 23:43 2 Technische sessie - Inwerksessie Mobiliteit
-• 24:43 3 (verkeers)Overlast Rotterdam Centrum / Meent
-• 25:43 3.01 Technische toelichting
-• 26:43 3.02 Inspreekmoment (verkeers)Overlast Rotterdam Centrum / Meent
-• 27:43 4 Sluiting
+• 38:14 1 Opening en mededelingen
+• 38:14 2 Technische sessie - MIRT-project Stadsbrug en OV
+• 3:29:05 3 Sluiting
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -50,10 +44,59 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Wed, 09 Sep 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260909_1.mp3" type="audio/mpeg" length="86922496"/>
-    <guid isPermaLink="false">rotterdam-20260909_1</guid>
-    <itunes:duration>2:47:55</itunes:duration>
+    <pubDate>Tue, 15 Sep 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260915_3.mp3" type="audio/mpeg" length="107438431"/>
+    <guid isPermaLink="false">rotterdam-20260915_3</guid>
+    <itunes:duration>3:31:25</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
+  </item>
+  <item>
+    <title>Commissie tot Onderzoek van de Rekening 15-09-2026</title>
+    <link>https://gemeenteraad.rotterdam.nl</link>
+    <description><![CDATA[Vergadering gemeente Rotterdam - 15 september 2026
+
+Agenda:
+• 1 Commissie tot Onderzoek van de Rekening (COR)
+• 1.01 Opening en mededelingen
+• 1.02 Vaststelling agenda
+• 1.03 Vaststellen adviezenlijst
+• 1.04 Commissieplanning
+• 1.05 Lijst van openstaande toezeggingen
+• 1.06.a Jaarrekeningcontrole 2026: startnotitie
+• 1.06.b Jaarrekeningcontrole 2026: Controleplan PWC
+• 1.07 Vierde en vijfde wijziging Verordening financiën Rotterdam 2021
+• 1.07.01 Betrekken bij vierde en vijfde wijziging Verordening financiën Rotterdam 2021
+• 1.08 Terugkoppeling van rapporteurs
+• 1.09 Collegereactie COR-rapport
+• 1.10 Rondvraag en sluiting
+
+Hoofdstukken:
+• 00:00 1 Commissie tot Onderzoek van de Rekening (COR)
+• 16:42 1.01 Opening en mededelingen
+• 18:23 1.02 Vaststelling agenda
+• 19:23 1.03 Vaststellen adviezenlijst
+• 21:03 1.04 Commissieplanning
+• 21:04 1.05 Lijst van openstaande toezeggingen
+• 22:04 1.06.a Jaarrekeningcontrole 2026: startnotitie
+• 56:59 1.06.b Jaarrekeningcontrole 2026: Controleplan PWC
+• 1:09:50 1.07 Vierde en vijfde wijziging Verordening financiën Rotterdam 2021
+• 1:10:50 1.07.01 Betrekken bij vierde en vijfde wijziging Verordening financiën Rotterdam
+• 1:12:13 1.08 Terugkoppeling van rapporteurs
+• 1:13:38 1.09 Collegereactie COR-rapport
+• 1:14:35 1.10 Rondvraag en sluiting
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://gemeenteraad.rotterdam.nl.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Tue, 15 Sep 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20260915_2.mp3" type="audio/mpeg" length="36525810"/>
+    <guid isPermaLink="false">rotterdam-20260915_2</guid>
+    <itunes:duration>1:16:00</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
