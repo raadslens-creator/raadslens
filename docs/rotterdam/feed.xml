@@ -22,15 +22,19 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Veiligheid, Bestuur & Financiën 29-10-2026</title>
+    <title>Commissie Leefomgeving & Economie 03-11-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 29 oktober 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 3 november 2026
 
 Agenda:
-• Technische sessie: investeringsbeleid
+• 1 Opening en mededelingen
+• 2 Technische sessie Gebiedsambitiedocument  Spaanse polder
+• 3 Sluiting
 
 Hoofdstukken:
-• 08:34 Technische sessie: investeringsbeleid
+• 00:00 1 Opening en mededelingen
+• 21:22 2 Technische sessie Gebiedsambitiedocument  Spaanse polder
+• 1:41:37 3 Sluiting
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -40,10 +44,55 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Thu, 29 Oct 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261029_3.mp3" type="audio/mpeg" length="37024370"/>
-    <guid isPermaLink="false">rotterdam-20261029_3</guid>
-    <itunes:duration>1:10:51</itunes:duration>
+    <pubDate>Tue, 03 Nov 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261103_3.mp3" type="audio/mpeg" length="49257917"/>
+    <guid isPermaLink="false">rotterdam-20261103_3</guid>
+    <itunes:duration>1:42:30</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
+  </item>
+  <item>
+    <title>Commissie tot Onderzoek van de Rekening 03-11-2026</title>
+    <link>https://gemeenteraad.rotterdam.nl</link>
+    <description><![CDATA[Vergadering gemeente Rotterdam - 3 november 2026
+
+Agenda:
+• 1 Commissie tot Onderzoek van de Rekening (COR)
+• 1.01 Opening en mededelingen
+• 1.02 Vaststelling agenda
+• 1.03 Vaststellen adviezenlijst
+• 1.04 Planning
+• 1.05 Monitorlijst van openstaande toezeggingen
+• 1.06 Terugkoppeling van rapporteurs
+• 1.07 Opvolging aanbevelingen COR en accountant
+• 1.07.01 Betrekken bij opvolging aanbevelingen COR en accountant
+• 1.08 1e Voortgangsrapportage Jaarrekeningcontrole 2026
+• 1.09 Rondvraag en Sluiting
+
+Hoofdstukken:
+• 15:30 1 Commissie tot Onderzoek van de Rekening (COR)
+• 15:46 1.01 Opening en mededelingen
+• 17:19 1.02 Vaststelling agenda
+• 17:42 1.03 Vaststellen adviezenlijst
+• 18:00 1.04 Planning
+• 18:55 1.05 Monitorlijst van openstaande toezeggingen
+• 19:55 1.06 Terugkoppeling van rapporteurs
+• 22:24 1.07 Opvolging aanbevelingen COR en accountant
+• 23:24 1.07.01 Betrekken bij opvolging aanbevelingen COR en accountant
+• 59:36 1.08 1e Voortgangsrapportage Jaarrekeningcontrole 2026
+• 1:14:59 1.09 Rondvraag en Sluiting
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://gemeenteraad.rotterdam.nl.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Tue, 03 Nov 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261103_2.mp3" type="audio/mpeg" length="36610809"/>
+    <guid isPermaLink="false">rotterdam-20261103_2</guid>
+    <itunes:duration>1:16:11</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
