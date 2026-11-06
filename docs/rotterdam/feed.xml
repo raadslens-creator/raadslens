@@ -22,29 +22,25 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Onderwijs & Samenleven 04-11-2026</title>
+    <title>Commissie Veiligheid, Bestuur & Financiën 05-11-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 4 november 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 5 november 2026
 
 Agenda:
 • 2 Overlegvergadering
 • 2.01 Opening en mededelingen
 • 2.02 Vaststellen van de agenda
-• 2.03 Inspreker Vreemd aan de Orde
-• 2.04 Voortgangsrapportage NPRZ
-• 2.04.01 Betrekken bij voortgangsrapportage NPRZ
-• 2.04.02 Motie waarvan afdoening wordt gevraagd
+• 2.03 Inspreker Vreemd aan de Orde [Indien aan de orde]
+• 2.04 Beantwoording vragen over ‘Corruptie bestrijd je niet met twee ontslagen’ en  ‘corruptie bij bouwprojecten’
 • 2.05 Rondvraag en sluiting
 
 Hoofdstukken:
-• 00:00 2 Overlegvergadering
-• 00:02 2.01 Opening en mededelingen
-• 01:12 2.02 Vaststellen van de agenda
-• 02:58 2.03 Inspreker Vreemd aan de Orde
-• 03:04 2.04 Voortgangsrapportage NPRZ
-• 04:04 2.04.01 Betrekken bij voortgangsrapportage NPRZ
-• 05:04 2.04.02 Motie waarvan afdoening wordt gevraagd
-• 06:04 2.05 Rondvraag en sluiting
+• 17:43 2 Overlegvergadering
+• 18:09 2.01 Opening en mededelingen
+• 19:07 2.02 Vaststellen van de agenda
+• 20:07 2.03 Inspreker Vreemd aan de Orde [Indien aan de orde]
+• 19:36 2.04 Beantwoording vragen over ‘Corruptie bestrijd je niet met twee ontslagen’ e
+• 1:22:40 2.05 Rondvraag en sluiting
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -54,10 +50,10 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Wed, 04 Nov 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261104_3.mp3" type="audio/mpeg" length="110113220"/>
-    <guid isPermaLink="false">rotterdam-20261104_3</guid>
-    <itunes:duration>3:49:10</itunes:duration>
+    <pubDate>Thu, 05 Nov 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261105_2.mp3" type="audio/mpeg" length="40123858"/>
+    <guid isPermaLink="false">rotterdam-20261105_2</guid>
+    <itunes:duration>1:23:30</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
