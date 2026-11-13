@@ -22,6 +22,35 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
+    <title>Zaanstad Beraad Raadzaal 12-11-2026</title>
+    <link>https://zaanstad.bestuurlijkeinformatie.nl/Calendar</link>
+    <description><![CDATA[Vergadering gemeente Zaanstad - 12 november 2026
+
+Agenda:
+• 1 Technische sessie Zaanse Schans
+• 1.1 Zaanse Schans bestuursopdracht en opschorten raadsbesluit
+• 2 Einde vergaderavond – informeel napraten in de foyer
+
+Hoofdstukken:
+• 00:00 1 Technische sessie Zaanse Schans
+• 01:00 1.1 Zaanse Schans bestuursopdracht en opschorten raadsbesluit
+• 02:00 2 Einde vergaderavond – informeel napraten in de foyer
+
+---
+Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
+
+De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor de inhoud van de vergadering zelf. De originele uitzending vind je op https://zaanstad.bestuurlijkeinformatie.nl/Calendar.
+
+Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
+
+Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
+    <pubDate>Thu, 12 Nov 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/zaanstad/20261112_1.mp3" type="audio/mpeg" length="42526502"/>
+    <guid isPermaLink="false">zaanstad-20261112_1</guid>
+    <itunes:duration>1:28:30</itunes:duration>
+    <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-zaanstad.png"/>
+  </item>
+  <item>
     <title>Raadsvergadering 10-11-2026</title>
     <link>https://zaanstad.bestuurlijkeinformatie.nl/Calendar</link>
     <description><![CDATA[Vergadering gemeente Zaanstad - 10 november 2026
