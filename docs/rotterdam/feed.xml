@@ -22,35 +22,31 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Leefomgeving & Economie 25-11-2026</title>
+    <title>Commissie Onderwijs & Samenleven 25-11-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
     <description><![CDATA[Vergadering gemeente Rotterdam - 25 november 2026
 
 Agenda:
+• Conceptagenda
 • 2 Overlegvergadering
 • 2.01 Opening en mededelingen
 • 2.02 Vaststellen van de agenda
-• 2.03 Terugkoppeling adviescommissies Metropoolregio Rotterdam Den Haag
-• 2.04 Terugkoppeling rapporteurs Stadsbrug en OV
-• 2.05 Inspreker Vreemd aan de Orde
-• 2.06 Bomenbalans
-• 2.06.01 Betrekken bij Bomenbalans
-• 2.07 Beantwoording vragen over de Erkenning en status van 47 Molukse KNIL-graven in Rotterdam
-• 2.08 Beantwoording vragen over Zwemmen in plaats van zweten aan de Maas
-• 2.09 Rondvraag en sluiting
+• 2.03 Adviezenlijst openbare overlegvergadering
+• 2.04 Inspreker Vreemd aan de Orde [Indien aan de orde]
+• 2.05 Voortgangsrapportage EU-arbeidsmigranten
+• 2.05.01 Betrekken bij Voortgangsrapportage EU-arbeidsmigranten
+• 2.07 Rondvraag en sluiting
 
 Hoofdstukken:
-• 00:00 2 Overlegvergadering
-• 01:00 2.01 Opening en mededelingen
-• 02:00 2.02 Vaststellen van de agenda
-• 05:51 2.03 Terugkoppeling adviescommissies Metropoolregio Rotterdam Den Haag
-• 06:59 2.04 Terugkoppeling rapporteurs Stadsbrug en OV
-• 07:59 2.05 Inspreker Vreemd aan de Orde
-• 18:50 2.06 Bomenbalans
-• 19:50 2.06.01 Betrekken bij Bomenbalans
-• 1:39:54 2.07 Beantwoording vragen over de Erkenning en status van 47 Molukse KNIL-graven
-• 2:26:02 2.08 Beantwoording vragen over Zwemmen in plaats van zweten aan de Maas
-• 3:17:28 2.09 Rondvraag en sluiting
+• 00:00 Conceptagenda
+• 01:00 2 Overlegvergadering
+• 02:00 2.01 Opening en mededelingen
+• 03:00 2.02 Vaststellen van de agenda
+• 04:00 2.03 Adviezenlijst openbare overlegvergadering
+• 05:00 2.04 Inspreker Vreemd aan de Orde [Indien aan de orde]
+• 06:00 2.05 Voortgangsrapportage EU-arbeidsmigranten
+• 07:00 2.05.01 Betrekken bij Voortgangsrapportage EU-arbeidsmigranten
+• 08:00 2.07 Rondvraag en sluiting
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -61,9 +57,9 @@ Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder comm
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
     <pubDate>Wed, 25 Nov 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261125_1.mp3" type="audio/mpeg" length="95783927"/>
-    <guid isPermaLink="false">rotterdam-20261125_1</guid>
-    <itunes:duration>3:19:20</itunes:duration>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261125_3.mp3" type="audio/mpeg" length="256056771"/>
+    <guid isPermaLink="false">rotterdam-20261125_3</guid>
+    <itunes:duration>7:48:36</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
