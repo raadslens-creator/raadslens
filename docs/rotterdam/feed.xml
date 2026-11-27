@@ -22,31 +22,15 @@
   <itunes:category text="Government"/>
   <itunes:explicit>false</itunes:explicit>
   <item>
-    <title>Commissie Onderwijs & Samenleven 25-11-2026</title>
+    <title>Commissie Veiligheid, Bestuur & Financiën 26-11-2026</title>
     <link>https://gemeenteraad.rotterdam.nl</link>
-    <description><![CDATA[Vergadering gemeente Rotterdam - 25 november 2026
+    <description><![CDATA[Vergadering gemeente Rotterdam - 26 november 2026
 
 Agenda:
-• Conceptagenda
-• 2 Overlegvergadering
-• 2.01 Opening en mededelingen
-• 2.02 Vaststellen van de agenda
-• 2.03 Adviezenlijst openbare overlegvergadering
-• 2.04 Inspreker Vreemd aan de Orde [Indien aan de orde]
-• 2.05 Voortgangsrapportage EU-arbeidsmigranten
-• 2.05.01 Betrekken bij Voortgangsrapportage EU-arbeidsmigranten
-• 2.07 Rondvraag en sluiting
+• Expertmeeting weerbaarheid
 
 Hoofdstukken:
-• 00:00 Conceptagenda
-• 01:00 2 Overlegvergadering
-• 02:00 2.01 Opening en mededelingen
-• 03:00 2.02 Vaststellen van de agenda
-• 04:00 2.03 Adviezenlijst openbare overlegvergadering
-• 05:00 2.04 Inspreker Vreemd aan de Orde [Indien aan de orde]
-• 06:00 2.05 Voortgangsrapportage EU-arbeidsmigranten
-• 07:00 2.05.01 Betrekken bij Voortgangsrapportage EU-arbeidsmigranten
-• 08:00 2.07 Rondvraag en sluiting
+• 1:18:04 Expertmeeting weerbaarheid
 
 ---
 Raadslens maakt lokale democratie toegankelijk. We zetten raadsvergaderingen automatisch om naar een podcast.
@@ -56,10 +40,10 @@ De verwerking gebeurt volledig automatisch. Wij zijn niet verantwoordelijk voor 
 Raadslens is een onafhankelijk initiatief, zonder politieke kleur en zonder commercieel belang.
 
 Vragen, feedback of een fout gevonden? Mail naar raadslens@gmail.com]]></description>
-    <pubDate>Wed, 25 Nov 2026 03:00:00 +0000</pubDate>
-    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261125_3.mp3" type="audio/mpeg" length="256056771"/>
-    <guid isPermaLink="false">rotterdam-20261125_3</guid>
-    <itunes:duration>7:48:36</itunes:duration>
+    <pubDate>Thu, 26 Nov 2026 03:00:00 +0000</pubDate>
+    <enclosure url="https://pub-adbd8382dc214647bb3e307524dd94d6.r2.dev/rotterdam/20261126_3.mp3" type="audio/mpeg" length="102752018"/>
+    <guid isPermaLink="false">rotterdam-20261126_3</guid>
+    <itunes:duration>3:33:51</itunes:duration>
     <itunes:image href="https://raadslens-creator.github.io/raadslens/logo-rotterdam.png"/>
   </item>
 </channel>
